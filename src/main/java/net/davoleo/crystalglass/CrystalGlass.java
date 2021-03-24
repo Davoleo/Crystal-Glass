@@ -1,10 +1,8 @@
 package net.davoleo.crystalglass;
 
 import net.davoleo.crystalglass.init.ModRegistry;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -29,24 +27,20 @@ public class CrystalGlass {
 
     public CrystalGlass()
     {
-        // Register the setup method for modloading
+        //Called on both sides during mod setup
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the doClientStuff method for modloading
+        //Called on the client side during mod setup (TODO : maybe move it to a separate class to avoid import issues)
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
+        //Initializes the Deferred Registry
         ModRegistry.init();
-
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get());
+    private void doClientStuff(final FMLClientSetupEvent event)
+    {
     }
 }

@@ -18,7 +18,7 @@ public class BlockStateGenerator extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels()
     {
-        //Crystal Cluster
+        //Register a directional block with an angle offset of 90 degrees and a different existing named model for each stage
         this.directionalBlock(
                 ModRegistry.CRYSTAL_CLUSTER_BLOCK.get(),
                 state -> models().getExistingFile(
@@ -26,7 +26,8 @@ public class BlockStateGenerator extends BlockStateProvider {
                                 CrystalGlass.MODID,
                                 "models/block/crystal_cluster_age_" + state.get(BlockStateProperties.AGE_0_7)
                         )
-                )
+                ),
+                90
         );
     }
 }
