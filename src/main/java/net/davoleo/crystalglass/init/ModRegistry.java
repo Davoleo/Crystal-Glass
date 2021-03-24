@@ -1,18 +1,22 @@
 package net.davoleo.crystalglass.init;
 
+import net.davoleo.crystalglass.CrystalGlass;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.minecraft.block.Block;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModRegistry {
 
-    @SubscribeEvent
-    public static void onBlocksRegistry(final RegistryEvent.Register<Block> registryEvent)
+    private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CrystalGlass.MODID);
+
+    public static void init()
     {
-        registryEvent.getRegistry().register(new CrystalClusterBlock());
+        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
+
+    public static final RegistryObject<CrystalClusterBlock> CRYSTAL_CLUSTER_BLOCK = BLOCKS.register("crystal_cluster", CrystalClusterBlock::new);
 
 }

@@ -1,6 +1,5 @@
 package net.davoleo.crystalglass.block;
 
-import net.davoleo.crystalglass.CrystalGlass;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -18,18 +17,17 @@ import java.util.Random;
 public class CrystalClusterBlock extends Block {
 
     private static final DirectionProperty FACING = BlockStateProperties.FACING;
-    private static final IntegerProperty AGE = BlockStateProperties.AGE_7;
+    private static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public CrystalClusterBlock()
     {
-        super(Properties.of(Material.STONE));
-        this.setRegistryName(CrystalGlass.MODID, "crystal_cluster");
-        Properties props = Properties.of(Material.STONE);
+        super(Properties.create(Material.ROCK));
+        Properties props = Properties.create(Material.ROCK);
     }
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> stateBuilder)
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> stateBuilder)
     {
         stateBuilder.add(FACING, AGE, WATERLOGGED);
     }
@@ -37,18 +35,18 @@ public class CrystalClusterBlock extends Block {
     @Override
     public void randomTick(@Nonnull BlockState state, @Nonnull ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random)
     {
-        int age = state.getValue(AGE);
-        boolean waterlogged = state.getValue(WATERLOGGED);
+        int age = state.get(AGE);
+        boolean waterlogged = state.get(WATERLOGGED);
         if (age < 7)
         {
             if (random.nextInt(waterlogged ? 30 : 15) == 0)
-                world.setBlock(pos, state.setValue(AGE, age + 1), 2);
+                world.setBlockState(pos, state.with(AGE, age + 1), 2);
         }
     }
 
     @Override
-    public boolean isRandomlyTicking(@Nonnull BlockState state)
+    public boolean ticksRandomly(@Nonnull BlockState state)
     {
-        return state.getValue(AGE) < 7;
+        return state.get(AGE) < 7;
     }
 }
