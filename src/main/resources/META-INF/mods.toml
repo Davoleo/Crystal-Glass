@@ -8,7 +8,7 @@ license="MIT"
 [[mods]] #mandatory
 modId="crystalglass" #mandatory
 version="${file.jarVersion}" #mandatory
-displayName="Crystal Glass" #mandatory
+displayName = "Crystal Glass" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
@@ -18,9 +18,9 @@ displayName="Crystal Glass" #mandatory
 # A text field displayed in the mod UI
 #credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
-authors="Davoleo, AlleCraft" #optional
+authors = "AlleCraft, Davoleo" #optional
 # The description text for the mod (multi line!) (#mandatory)
-description='''
+description = '''
 TODO: NYI - Have some lorem ipsum.
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sagittis luctus odio eu tempus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat ligula eget lacus auctor sagittis. In hac habitasse platea dictumst. Nunc gravida elit vitae sem vehicula efficitur. Donec mattis ipsum et arcu lobortis, eleifend sagittis sem rutrum. Cras pharetra quam eget posuere fermentum. Sed id tincidunt justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 '''

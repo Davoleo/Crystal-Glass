@@ -24,7 +24,7 @@ public class BlockStateGenerator extends BlockStateProvider {
                 state -> models().getExistingFile(
                         new ResourceLocation(
                                 CrystalGlass.MODID,
-                                "models/block/crystal_cluster_age_" + state.get(BlockStateProperties.AGE_0_7)
+                                "block/crystal_cluster_age_" + state.get(BlockStateProperties.AGE_0_7)
                         )
                 ),
                 90

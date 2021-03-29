@@ -1,0 +1,94 @@
+{
+  "credit": "Made by AlleCraft",
+  "parent": "block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "0": "crystalglass:block/crystal_in",
+    "1": "crystalglass:block/crystal_out",
+    "particle": "crystalglass:block/crystal_out"
+  },
+  "elements": [
+    {
+      "from": [7, -0.002, 7],
+      "to": [9, 2.748, 9],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [7.5, 3.5, 8.5]
+      },
+      "faces": {
+        "north": {
+          "uv": [0, 0, 2, 3.002],
+          "texture": "#1"
+        },
+        "east": {
+          "uv": [0, 0, 2, 3.002],
+          "texture": "#1"
+        },
+        "south": {
+          "uv": [0, 0, 2, 3.002],
+          "texture": "#1"
+        },
+        "west": {
+          "uv": [0, 0, 2, 3.002],
+          "texture": "#1"
+        },
+        "up": {
+          "uv": [0, 0, 2, 2],
+          "texture": "#1"
+        },
+        "down": {
+          "uv": [0, 0, 2, 2],
+          "texture": "#1"
+        }
+      }
+    },
+    {
+      "from": [7.625, 0, 7.625],
+      "to": [8.375, 2, 8.375],
+      "faces": {
+        "north": {
+          "uv": [0, 0, 1.5, 2.75],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [0, 0, 1.5, 2.75],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [0, 0, 1.5, 2.75],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [0, 0, 1.5, 2.75],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [0, 0, 1.5, 1.5],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [0, 0, 1.5, 1.5],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [0, 225, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.40, 0.40, 0.40]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 225, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.40, 0.40, 0.40]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, 0, 0],
+      "scale": [1.05, 1.05, 1.05]
+    }
+  }
+}
