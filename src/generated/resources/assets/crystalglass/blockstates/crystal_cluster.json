@@ -1,212 +1,428 @@
 {
   "variants": {
-    "age=0,facing=down": {
-      "model": "crystalglass:block/crystal_cluster_age_0",
-      "x": 180
-    },
-    "age=1,facing=down": {
-      "model": "crystalglass:block/crystal_cluster_age_1",
-      "x": 180
-    },
-    "age=2,facing=down": {
-      "model": "crystalglass:block/crystal_cluster_age_2",
-      "x": 180
-    },
-    "age=3,facing=down": {
-      "model": "crystalglass:block/crystal_cluster_age_3",
-      "x": 180
-    },
-    "age=4,facing=down": {
-      "model": "crystalglass:block/crystal_cluster_age_4",
-      "x": 180
-    },
-    "age=5,facing=down": {
-      "model": "crystalglass:block/crystal_cluster_age_5",
-      "x": 180
-    },
-    "age=6,facing=down": {
-      "model": "crystalglass:block/crystal_cluster_age_6",
-      "x": 180
-    },
-    "age=7,facing=down": {
-      "model": "crystalglass:block/crystal_cluster_age_7",
-      "x": 180
-    },
-    "age=0,facing=up": {
+    "age=0,face=floor,facing=north": {
       "model": "crystalglass:block/crystal_cluster_age_0"
     },
-    "age=1,facing=up": {
+    "age=1,face=floor,facing=north": {
       "model": "crystalglass:block/crystal_cluster_age_1"
     },
-    "age=2,facing=up": {
+    "age=2,face=floor,facing=north": {
       "model": "crystalglass:block/crystal_cluster_age_2"
     },
-    "age=3,facing=up": {
+    "age=3,face=floor,facing=north": {
       "model": "crystalglass:block/crystal_cluster_age_3"
     },
-    "age=4,facing=up": {
+    "age=4,face=floor,facing=north": {
       "model": "crystalglass:block/crystal_cluster_age_4"
     },
-    "age=5,facing=up": {
+    "age=5,face=floor,facing=north": {
       "model": "crystalglass:block/crystal_cluster_age_5"
     },
-    "age=6,facing=up": {
+    "age=6,face=floor,facing=north": {
       "model": "crystalglass:block/crystal_cluster_age_6"
     },
-    "age=7,facing=up": {
+    "age=7,face=floor,facing=north": {
       "model": "crystalglass:block/crystal_cluster_age_7"
     },
-    "age=0,facing=north": {
+    "age=0,face=wall,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_0",
+      "x": 90
+    },
+    "age=1,face=wall,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_1",
+      "x": 90
+    },
+    "age=2,face=wall,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_2",
+      "x": 90
+    },
+    "age=3,face=wall,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_3",
+      "x": 90
+    },
+    "age=4,face=wall,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_4",
+      "x": 90
+    },
+    "age=5,face=wall,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_5",
+      "x": 90
+    },
+    "age=6,face=wall,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_6",
+      "x": 90
+    },
+    "age=7,face=wall,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_7",
+      "x": 90
+    },
+    "age=0,face=ceiling,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_0",
+      "x": 180
+    },
+    "age=1,face=ceiling,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_1",
+      "x": 180
+    },
+    "age=2,face=ceiling,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_2",
+      "x": 180
+    },
+    "age=3,face=ceiling,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_3",
+      "x": 180
+    },
+    "age=4,face=ceiling,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_4",
+      "x": 180
+    },
+    "age=5,face=ceiling,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_5",
+      "x": 180
+    },
+    "age=6,face=ceiling,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_6",
+      "x": 180
+    },
+    "age=7,face=ceiling,facing=north": {
+      "model": "crystalglass:block/crystal_cluster_age_7",
+      "x": 180
+    },
+    "age=0,face=floor,facing=south": {
+      "model": "crystalglass:block/crystal_cluster_age_0",
+      "y": 180
+    },
+    "age=1,face=floor,facing=south": {
+      "model": "crystalglass:block/crystal_cluster_age_1",
+      "y": 180
+    },
+    "age=2,face=floor,facing=south": {
+      "model": "crystalglass:block/crystal_cluster_age_2",
+      "y": 180
+    },
+    "age=3,face=floor,facing=south": {
+      "model": "crystalglass:block/crystal_cluster_age_3",
+      "y": 180
+    },
+    "age=4,face=floor,facing=south": {
+      "model": "crystalglass:block/crystal_cluster_age_4",
+      "y": 180
+    },
+    "age=5,face=floor,facing=south": {
+      "model": "crystalglass:block/crystal_cluster_age_5",
+      "y": 180
+    },
+    "age=6,face=floor,facing=south": {
+      "model": "crystalglass:block/crystal_cluster_age_6",
+      "y": 180
+    },
+    "age=7,face=floor,facing=south": {
+      "model": "crystalglass:block/crystal_cluster_age_7",
+      "y": 180
+    },
+    "age=0,face=wall,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_0",
       "x": 90,
       "y": 180
     },
-    "age=1,facing=north": {
+    "age=1,face=wall,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_1",
       "x": 90,
       "y": 180
     },
-    "age=2,facing=north": {
+    "age=2,face=wall,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_2",
       "x": 90,
       "y": 180
     },
-    "age=3,facing=north": {
+    "age=3,face=wall,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_3",
       "x": 90,
       "y": 180
     },
-    "age=4,facing=north": {
+    "age=4,face=wall,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_4",
       "x": 90,
       "y": 180
     },
-    "age=5,facing=north": {
+    "age=5,face=wall,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_5",
       "x": 90,
       "y": 180
     },
-    "age=6,facing=north": {
+    "age=6,face=wall,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_6",
       "x": 90,
       "y": 180
     },
-    "age=7,facing=north": {
+    "age=7,face=wall,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_7",
       "x": 90,
       "y": 180
     },
-    "age=0,facing=south": {
+    "age=0,face=ceiling,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_0",
-      "x": 90
+      "x": 180,
+      "y": 180
     },
-    "age=1,facing=south": {
+    "age=1,face=ceiling,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_1",
-      "x": 90
+      "x": 180,
+      "y": 180
     },
-    "age=2,facing=south": {
+    "age=2,face=ceiling,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_2",
-      "x": 90
+      "x": 180,
+      "y": 180
     },
-    "age=3,facing=south": {
+    "age=3,face=ceiling,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_3",
-      "x": 90
+      "x": 180,
+      "y": 180
     },
-    "age=4,facing=south": {
+    "age=4,face=ceiling,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_4",
-      "x": 90
+      "x": 180,
+      "y": 180
     },
-    "age=5,facing=south": {
+    "age=5,face=ceiling,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_5",
-      "x": 90
+      "x": 180,
+      "y": 180
     },
-    "age=6,facing=south": {
+    "age=6,face=ceiling,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_6",
-      "x": 90
+      "x": 180,
+      "y": 180
     },
-    "age=7,facing=south": {
+    "age=7,face=ceiling,facing=south": {
       "model": "crystalglass:block/crystal_cluster_age_7",
-      "x": 90
+      "x": 180,
+      "y": 180
     },
-    "age=0,facing=west": {
+    "age=0,face=floor,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_0",
+      "y": 270
+    },
+    "age=1,face=floor,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_1",
+      "y": 270
+    },
+    "age=2,face=floor,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_2",
+      "y": 270
+    },
+    "age=3,face=floor,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_3",
+      "y": 270
+    },
+    "age=4,face=floor,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_4",
+      "y": 270
+    },
+    "age=5,face=floor,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_5",
+      "y": 270
+    },
+    "age=6,face=floor,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_6",
+      "y": 270
+    },
+    "age=7,face=floor,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_7",
+      "y": 270
+    },
+    "age=0,face=wall,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_0",
+      "x": 90,
+      "y": 270
+    },
+    "age=1,face=wall,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_1",
+      "x": 90,
+      "y": 270
+    },
+    "age=2,face=wall,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_2",
+      "x": 90,
+      "y": 270
+    },
+    "age=3,face=wall,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_3",
+      "x": 90,
+      "y": 270
+    },
+    "age=4,face=wall,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_4",
+      "x": 90,
+      "y": 270
+    },
+    "age=5,face=wall,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_5",
+      "x": 90,
+      "y": 270
+    },
+    "age=6,face=wall,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_6",
+      "x": 90,
+      "y": 270
+    },
+    "age=7,face=wall,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_7",
+      "x": 90,
+      "y": 270
+    },
+    "age=0,face=ceiling,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_0",
+      "x": 180,
+      "y": 270
+    },
+    "age=1,face=ceiling,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_1",
+      "x": 180,
+      "y": 270
+    },
+    "age=2,face=ceiling,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_2",
+      "x": 180,
+      "y": 270
+    },
+    "age=3,face=ceiling,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_3",
+      "x": 180,
+      "y": 270
+    },
+    "age=4,face=ceiling,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_4",
+      "x": 180,
+      "y": 270
+    },
+    "age=5,face=ceiling,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_5",
+      "x": 180,
+      "y": 270
+    },
+    "age=6,face=ceiling,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_6",
+      "x": 180,
+      "y": 270
+    },
+    "age=7,face=ceiling,facing=west": {
+      "model": "crystalglass:block/crystal_cluster_age_7",
+      "x": 180,
+      "y": 270
+    },
+    "age=0,face=floor,facing=east": {
+      "model": "crystalglass:block/crystal_cluster_age_0",
+      "y": 90
+    },
+    "age=1,face=floor,facing=east": {
+      "model": "crystalglass:block/crystal_cluster_age_1",
+      "y": 90
+    },
+    "age=2,face=floor,facing=east": {
+      "model": "crystalglass:block/crystal_cluster_age_2",
+      "y": 90
+    },
+    "age=3,face=floor,facing=east": {
+      "model": "crystalglass:block/crystal_cluster_age_3",
+      "y": 90
+    },
+    "age=4,face=floor,facing=east": {
+      "model": "crystalglass:block/crystal_cluster_age_4",
+      "y": 90
+    },
+    "age=5,face=floor,facing=east": {
+      "model": "crystalglass:block/crystal_cluster_age_5",
+      "y": 90
+    },
+    "age=6,face=floor,facing=east": {
+      "model": "crystalglass:block/crystal_cluster_age_6",
+      "y": 90
+    },
+    "age=7,face=floor,facing=east": {
+      "model": "crystalglass:block/crystal_cluster_age_7",
+      "y": 90
+    },
+    "age=0,face=wall,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_0",
       "x": 90,
       "y": 90
     },
-    "age=1,facing=west": {
+    "age=1,face=wall,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_1",
       "x": 90,
       "y": 90
     },
-    "age=2,facing=west": {
+    "age=2,face=wall,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_2",
       "x": 90,
       "y": 90
     },
-    "age=3,facing=west": {
+    "age=3,face=wall,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_3",
       "x": 90,
       "y": 90
     },
-    "age=4,facing=west": {
+    "age=4,face=wall,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_4",
       "x": 90,
       "y": 90
     },
-    "age=5,facing=west": {
+    "age=5,face=wall,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_5",
       "x": 90,
       "y": 90
     },
-    "age=6,facing=west": {
+    "age=6,face=wall,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_6",
       "x": 90,
       "y": 90
     },
-    "age=7,facing=west": {
+    "age=7,face=wall,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_7",
       "x": 90,
       "y": 90
     },
-    "age=0,facing=east": {
+    "age=0,face=ceiling,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_0",
-      "x": 90,
-      "y": 270
+      "x": 180,
+      "y": 90
     },
-    "age=1,facing=east": {
+    "age=1,face=ceiling,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_1",
-      "x": 90,
-      "y": 270
+      "x": 180,
+      "y": 90
     },
-    "age=2,facing=east": {
+    "age=2,face=ceiling,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_2",
-      "x": 90,
-      "y": 270
+      "x": 180,
+      "y": 90
     },
-    "age=3,facing=east": {
+    "age=3,face=ceiling,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_3",
-      "x": 90,
-      "y": 270
+      "x": 180,
+      "y": 90
     },
-    "age=4,facing=east": {
+    "age=4,face=ceiling,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_4",
-      "x": 90,
-      "y": 270
+      "x": 180,
+      "y": 90
     },
-    "age=5,facing=east": {
+    "age=5,face=ceiling,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_5",
-      "x": 90,
-      "y": 270
+      "x": 180,
+      "y": 90
     },
-    "age=6,facing=east": {
+    "age=6,face=ceiling,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_6",
-      "x": 90,
-      "y": 270
+      "x": 180,
+      "y": 90
     },
-    "age=7,facing=east": {
+    "age=7,face=ceiling,facing=east": {
       "model": "crystalglass:block/crystal_cluster_age_7",
-      "x": 90,
-      "y": 270
+      "x": 180,
+      "y": 90
     }
   }
 }
