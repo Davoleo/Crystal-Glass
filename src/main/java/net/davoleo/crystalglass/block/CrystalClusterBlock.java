@@ -1,11 +1,11 @@
 package net.davoleo.crystalglass.block;
 
 import net.davoleo.crystalglass.init.ModRegistry;
+import net.davoleo.crystalglass.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFaceBlock;
 import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -23,7 +23,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -45,12 +44,11 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
 
     public CrystalClusterBlock()
     {
-        super(Properties.create(Material.ROCK)
+        super(Utils.DEFAULT_ROCK_PROPERTIES
                 .setOpaque((p_test_1_, p_test_2_, p_test_3_) -> false)
                 .notSolid()
                 .setEmmisiveRendering((p_test_1_, p_test_2_, p_test_3_) -> true)
-                .harvestTool(ToolType.PICKAXE)
-                .hardnessAndResistance(0.8F)
+                .setLightLevel(state -> 3 + state.get(AGE))
         );
         VOXEL_SHAPES = generateVoxelShapes();
     }

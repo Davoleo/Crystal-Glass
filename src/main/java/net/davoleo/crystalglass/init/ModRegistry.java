@@ -44,7 +44,10 @@ public class ModRegistry {
         static
         {
             BlockStateProperties.AGE_0_7.getAllowedValues().forEach(age ->
-                    CRYSTAL_CLUSTERS.add(REGISTER.register("crystal_cluster_age_" + age, () -> new BlockItem(CRYSTAL_CLUSTER_BLOCK.get(), DEFAULT_ITEM_PROPERTIES)))
+                    CRYSTAL_CLUSTERS.add(REGISTER.register(
+                            "crystal_cluster_age_" + age,
+                            () -> new BlockItem(CRYSTAL_CLUSTER_BLOCK.get(), DEFAULT_ITEM_PROPERTIES))
+                    )
             );
         }
 
