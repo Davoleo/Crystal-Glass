@@ -50,7 +50,6 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
                 .notSolid()
                 .setEmmisiveRendering((p_test_1_, p_test_2_, p_test_3_) -> true)
                 .harvestTool(ToolType.PICKAXE)
-                .setRequiresTool()
                 .hardnessAndResistance(3)
         );
         VOXEL_SHAPES = generateVoxelShapes();
