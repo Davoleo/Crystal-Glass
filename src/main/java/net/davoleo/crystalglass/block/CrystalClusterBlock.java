@@ -7,6 +7,7 @@ import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.material.Material;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -18,8 +19,10 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Random;
 
 /**
@@ -37,12 +40,16 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     // TODO: 29/03/2021 Fix WATERLOGGED state on placement set to true
-    // TODO: 29/03/2021 Add Items for each age state
     public CrystalClusterBlock()
     {
-        super(Properties.create(Material.ROCK).setOpaque((p_test_1_, p_test_2_, p_test_3_) -> false));
-        // TODO: 24/03/2021 work on these properties
-        Properties props = Properties.create(Material.ROCK);
+        super(Properties.create(Material.ROCK)
+                .setOpaque((p_test_1_, p_test_2_, p_test_3_) -> false)
+                .notSolid()
+                .setEmmisiveRendering((p_test_1_, p_test_2_, p_test_3_) -> true)
+                .harvestTool(ToolType.PICKAXE)
+                .setRequiresTool()
+                .hardnessAndResistance(3)
+        );
         VOXEL_SHAPES = generateVoxelShapes();
     }
 
@@ -64,10 +71,10 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
             {
                 switch (face)
                 {
-                    case 6:
+                    case 5:
                         shapes[age][face] = Block.makeCuboidShape(horizCoord1, 0.0D, horizCoord1, horizCoord2, height, horizCoord2);
                         break;
-                    case 5:
+                    case 4:
                         shapes[age][face] = Block.makeCuboidShape(horizCoord1, 16.0D, horizCoord1, horizCoord2, 16 - height, horizCoord2);
                         break;
                     case 0:
@@ -105,9 +112,9 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
         Direction horizontalDirection = state.get(HORIZONTAL_FACING);
 
         if (face == AttachFace.FLOOR)
-            return VOXEL_SHAPES[age][6];
-        else if (face == AttachFace.CEILING)
             return VOXEL_SHAPES[age][5];
+        else if (face == AttachFace.CEILING)
+            return VOXEL_SHAPES[age][4];
         else
             return VOXEL_SHAPES[age][horizontalDirection.getHorizontalIndex()];
     }
@@ -121,6 +128,15 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> stateBuilder)
     {
         stateBuilder.add(HORIZONTAL_FACING, HorizontalFaceBlock.FACE, AGE, WATERLOGGED);
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context)
+    {
+        BlockState state = super.getStateForPlacement(context);
+        //context.getItem().getItem().getRegistryName().
+        return state;
     }
 
     /**
@@ -153,7 +169,18 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
     }
 
     @Override
-    public boolean ticksRandomly(@Nonnull BlockState state)
+    public boolean isTransparent(@Nonnull BlockState state)
+    {
+        return true;
+    }
+
+    /**
+     * Should tick randomly to grow only if the age state is below 7
+     *
+     * @return if it randomly ticks
+     */
+    @Override
+    public boolean ticksRandomly(BlockState state)
     {
         return state.get(AGE) < 7;
     }
