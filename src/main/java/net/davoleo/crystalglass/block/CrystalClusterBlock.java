@@ -1,13 +1,16 @@
 package net.davoleo.crystalglass.block;
 
+import net.davoleo.crystalglass.init.ModRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFaceBlock;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -15,6 +18,7 @@ import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
@@ -39,7 +43,6 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
     private static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    // TODO: 29/03/2021 Fix WATERLOGGED state on placement set to true
     public CrystalClusterBlock()
     {
         super(Properties.create(Material.ROCK)
@@ -119,6 +122,12 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
             return VOXEL_SHAPES[age][horizontalDirection.getHorizontalIndex()];
     }
 
+    @Override
+    public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player)
+    {
+        return new ItemStack(ModRegistry.Items.CRYSTAL_CLUSTERS.get(state.get(AGE)).get());
+    }
+
     /**
      * This Method override is used to build a state container for the block with all the properties that we want it to have
      *
@@ -132,10 +141,19 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context)
+    public BlockState getStateForPlacement(@Nonnull BlockItemUseContext context)
     {
         BlockState state = super.getStateForPlacement(context);
-        //context.getItem().getItem().getRegistryName().
+
+        //Set the waterlogged state
+        boolean waterlogged = context.getWorld().hasWater(context.getPos());
+        state = state.with(WATERLOGGED, waterlogged);
+
+        //Set the age state
+        String itemName = context.getItem().getItem().getRegistryName().getPath();
+        char age = itemName.charAt(itemName.length() - 1);
+        state = state.with(AGE, Character.getNumericValue(age));
+
         return state;
     }
 

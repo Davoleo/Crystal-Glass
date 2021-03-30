@@ -1,10 +1,10 @@
 package net.davoleo.crystalglass;
 
+import net.davoleo.crystalglass.init.ClientSetup;
 import net.davoleo.crystalglass.init.ModRegistry;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -29,18 +29,14 @@ public class CrystalGlass {
     {
         //Called on both sides during mod setup
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        //Called on the client side during mod setup (TODO : maybe move it to a separate class to avoid import issues)
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        //Called on the client side during mod setup
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
 
         //Initializes the Deferred Registry
         ModRegistry.init();
     }
 
     private void setup(final FMLCommonSetupEvent event)
-    {
-    }
-
-    private void doClientStuff(final FMLClientSetupEvent event)
     {
     }
 }
