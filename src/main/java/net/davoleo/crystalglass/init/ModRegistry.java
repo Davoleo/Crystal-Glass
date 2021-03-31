@@ -2,6 +2,7 @@ package net.davoleo.crystalglass.init;
 
 import com.google.common.collect.Lists;
 import net.davoleo.crystalglass.CrystalGlass;
+import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -11,8 +12,10 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Uses Deferred registry
@@ -36,10 +39,26 @@ public class ModRegistry {
     //Registers the Crystal Cluster Block and its related BlockItem; TODO: this can be later rearranged to be way more polished less verbose
     public static final RegistryObject<CrystalClusterBlock> CRYSTAL_CLUSTER_BLOCK = BLOCKS.register("crystal_cluster", CrystalClusterBlock::new);
 
+    public static final List<RegistryObject<CrystalBlock>> CRYSTAL_BLOCKS = Lists.newArrayListWithCapacity(CrystalBlock.Size.values().length);
+
+    static
+    {
+        for (CrystalBlock.Size size : CrystalBlock.Size.values())
+        {
+            Pair<String, Supplier<CrystalBlock>> blockPair = CrystalBlock.create(size);
+            CRYSTAL_BLOCKS.add(BLOCKS.register(blockPair.getLeft(), blockPair.getRight()));
+        }
+    }
+
     public static class Items {
         private static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, CrystalGlass.MODID);
 
-        public static final List<RegistryObject<Item>> CRYSTAL_CLUSTERS = Lists.newArrayList();
+        private static <T extends Block> RegistryObject<Item> registerFromBlock(RegistryObject<T> block)
+        {
+            return REGISTER.register(block.getId().getPath(), () -> new BlockItem(block.get(), DEFAULT_ITEM_PROPERTIES));
+        }
+
+        public static final List<RegistryObject<Item>> CRYSTAL_CLUSTERS = Lists.newArrayListWithCapacity(8);
 
         static
         {
@@ -49,6 +68,14 @@ public class ModRegistry {
                             () -> new BlockItem(CRYSTAL_CLUSTER_BLOCK.get(), DEFAULT_ITEM_PROPERTIES))
                     )
             );
+        }
+
+        public static final List<RegistryObject<Item>> CRYSTALS = Lists.newArrayListWithCapacity(CrystalBlock.Size.values().length);
+
+        static
+        {
+            for (CrystalBlock.Size size : CrystalBlock.Size.values())
+                CRYSTALS.add(registerFromBlock(CRYSTAL_BLOCKS.get(size.ordinal())));
         }
 
     }

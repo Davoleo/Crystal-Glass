@@ -1,17 +1,12 @@
 package net.davoleo.crystalglass.block;
 
 import net.davoleo.crystalglass.init.ModRegistry;
-import net.davoleo.crystalglass.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFaceBlock;
-import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.AttachFace;
@@ -35,21 +30,15 @@ import java.util.Random;
  * 2. An age depending on the stage of growth of the crystal<br>
  * 3. A waterlogged boolean property to describe whether the block is waterlogged or not<br>
  */
-public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLoggable {
+public class CrystalClusterBlock extends CrystalBlock {
 
     private final VoxelShape[][] VOXEL_SHAPES;
 
     private static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
-    private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public CrystalClusterBlock()
     {
-        super(Utils.DEFAULT_ROCK_PROPERTIES
-                .setOpaque((p_test_1_, p_test_2_, p_test_3_) -> false)
-                .notSolid()
-                .setEmmisiveRendering((p_test_1_, p_test_2_, p_test_3_) -> true)
-                .setLightLevel(state -> 3 + state.get(AGE))
-        );
+        super(state -> 3 + state.get(AGE));
         VOXEL_SHAPES = generateVoxelShapes();
     }
 
@@ -142,10 +131,6 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
     {
         BlockState state = super.getStateForPlacement(context);
 
-        //Set the waterlogged state
-        boolean waterlogged = context.getWorld().hasWater(context.getPos());
-        state = state.with(WATERLOGGED, waterlogged);
-
         //Set the age state
         String itemName = context.getItem().getItem().getRegistryName().getPath();
         char age = itemName.charAt(itemName.length() - 1);
@@ -172,15 +157,6 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
             if (random.nextInt(16) == 0)
                 world.setBlockState(pos, state.with(AGE, age + 1), 2);
         }
-    }
-
-    /**
-     * @return the state of the fluid inside of the block if it's waterlogged
-     */
-    @Nonnull
-    public FluidState getFluidState(BlockState state)
-    {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
     }
 
     @Override
