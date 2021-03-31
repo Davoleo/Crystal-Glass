@@ -165,11 +165,11 @@ public class CrystalClusterBlock extends HorizontalFaceBlock implements IWaterLo
     public void randomTick(BlockState state, @Nonnull ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random)
     {
         int age = state.get(AGE);
-        boolean waterlogged = state.get(WATERLOGGED);
+        //boolean waterlogged = state.get(WATERLOGGED);
         if (age < 7)
         {
             //Prev 30 and 15
-            if (random.nextInt(waterlogged ? 16 : 8) == 0)
+            if (random.nextInt(16) == 0)
                 world.setBlockState(pos, state.with(AGE, age + 1), 2);
         }
     }
