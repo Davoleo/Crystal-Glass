@@ -131,6 +131,9 @@ public class CrystalClusterBlock extends CrystalBlock {
     {
         BlockState state = super.getStateForPlacement(context);
 
+        if (state == null)
+            return null;
+
         //Set the age state
         String itemName = context.getItem().getItem().getRegistryName().getPath();
         char age = itemName.charAt(itemName.length() - 1);

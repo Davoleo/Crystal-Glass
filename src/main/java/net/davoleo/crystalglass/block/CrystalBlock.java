@@ -97,6 +97,9 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
     {
         BlockState state = super.getStateForPlacement(context);
 
+        if (state == null)
+            return null;
+
         //Set the waterlogged state
         boolean waterlogged = context.getWorld().hasWater(context.getPos());
         state = state.with(WATERLOGGED, waterlogged);
