@@ -157,7 +157,7 @@ public class CrystalClusterBlock extends CrystalBlock {
         if (age < 7)
         {
             //Prev 30 and 15
-            if (random.nextInt(16) == 0)
+            if (random.nextInt(6) == 0)
                 world.setBlockState(pos, state.with(AGE, age + 1), 2);
         }
     }
