@@ -1,4 +1,7 @@
 {
+  "itemGroup.crystalglass": "Vetro di Cristallo",
   "block.crystalglass.crystal_cluster": "Ammasso di Cristallo",
-  "itemGroup.crystalglass": "Crystal Glass"
+  "block.crystalglass.large_crystal": "Cristallo Grande",
+  "block.crystalglass.medium_crystal": "Cristallo Medio",
+  "block.crystalglass.small_crystal": "Cristallo Piccolo"
 }
