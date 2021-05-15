@@ -27,7 +27,7 @@ public class BlockStateGenerator extends BlockStateProvider {
         //Register a directional block with an angle offset of 90 degrees and a different existing named model for each stage
         getVariantBuilder(crystalCluster).forAllStatesExcept(state -> ConfiguredModel.builder()
                         .modelFile(models().getExistingFile(
-                                new ResourceLocation(CrystalGlass.MODID, "block/crystal_cluster_age_" + state.get(BlockStateProperties.AGE_0_7))
+                                new ResourceLocation(CrystalGlass.MODID, "block/crystal_cluster_age_" + state.get(CrystalClusterBlock.AGE))
                         ))
                         .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 180) % 360)
                         .rotationX(state.get(HorizontalFaceBlock.FACE).ordinal() * 90)

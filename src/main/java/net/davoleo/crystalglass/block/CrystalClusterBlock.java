@@ -36,11 +36,11 @@ public class CrystalClusterBlock extends CrystalBlock {
 
     private final VoxelShape[][] VOXEL_SHAPES;
 
-    private static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
 
     public CrystalClusterBlock()
     {
-        super(state -> 3 + state.get(AGE));
+        super(state -> 6 + (3 * state.get(AGE)));
         VOXEL_SHAPES = generateVoxelShapes();
     }
 
@@ -49,9 +49,9 @@ public class CrystalClusterBlock extends CrystalBlock {
      */
     private VoxelShape[][] generateVoxelShapes()
     {
-        VoxelShape[][] shapes = new VoxelShape[8][6];
+        VoxelShape[][] shapes = new VoxelShape[4][6];
 
-        for (int age = 0; age < 8; age++)
+        for (int age = 0; age < 4; age++)
         {
             float height = 4 + (age < 3 ? age : (age * 2) - 2);
             float horizCoord1 = 6.5F - 0.5F * age;
@@ -131,7 +131,7 @@ public class CrystalClusterBlock extends CrystalBlock {
     {
         int age = state.get(AGE);
         //boolean waterlogged = state.get(WATERLOGGED);
-        if (age < 7)
+        if (age < 3)
         {
             //Prev 30 and 15
             if (random.nextInt(6) == 0)
@@ -153,6 +153,6 @@ public class CrystalClusterBlock extends CrystalBlock {
     @Override
     public boolean ticksRandomly(BlockState state)
     {
-        return state.get(AGE) < 7;
+        return state.get(AGE) < 3;
     }
 }

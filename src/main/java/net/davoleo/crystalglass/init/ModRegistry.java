@@ -7,7 +7,6 @@ import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -62,7 +61,7 @@ public class ModRegistry {
 
         static
         {
-            BlockStateProperties.AGE_0_7.getAllowedValues().forEach(age ->
+            CrystalClusterBlock.AGE.getAllowedValues().forEach(age ->
                     CRYSTAL_CLUSTERS.add(REGISTER.register(
                             "crystal_cluster_age_" + age,
                             () -> new BlockItem(CRYSTAL_CLUSTER_BLOCK.get(), DEFAULT_ITEM_PROPERTIES))
