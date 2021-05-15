@@ -13,9 +13,14 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.IBlockReader;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -29,9 +34,16 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
     protected static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public enum Size {
-        SMALL,
-        MEDIUM,
-        LARGE;
+        SMALL(new Vector3f(7, 0, 7), new Vector3f(9, 8, 9)),
+        MEDIUM(new Vector3f(6.5F, 0, 6.5F), new Vector3f(9.5F, 12, 9.5F)),
+        LARGE(new Vector3f(6, 0, 6), new Vector3f(10, 16, 10));
+
+        private final VoxelShape[] shapes;
+
+        Size(Vector3f shapeStart, Vector3f shapeEnd)
+        {
+            shapes = Utils.generateDirectionalVoxelShapes(shapeStart, shapeEnd);
+        }
 
         /**
          * @return 4 | 8 | 12
@@ -39,6 +51,23 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
         private int getLightLevel(BlockState state)
         {
             return 4 + (4 * this.ordinal());
+        }
+
+        public VoxelShape getCrystalShape(Direction direction, AttachFace attachFace)
+        {
+            if (attachFace == AttachFace.CEILING)
+                return shapes[4];
+
+            if (attachFace == AttachFace.FLOOR)
+                return shapes[5];
+
+            int horizIndex = direction.getHorizontalIndex();
+            if (horizIndex != -1)
+            {
+                return shapes[horizIndex];
+            }
+
+            return shapes[5];
         }
     }
 
@@ -74,6 +103,16 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
                 .notSolid()
         );
         this.size = null;
+    }
+
+    @Nonnull
+    @Override
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context)
+    {
+        if (size != null)
+            return size.getCrystalShape(state.get(BlockStateProperties.HORIZONTAL_FACING), state.get(HorizontalFaceBlock.FACE));
+        else
+            return super.getShape(state, worldIn, pos, context);
     }
 
     @Override

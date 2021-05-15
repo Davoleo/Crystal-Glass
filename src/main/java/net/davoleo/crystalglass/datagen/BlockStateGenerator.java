@@ -10,7 +10,6 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class BlockStateGenerator extends BlockStateProvider {
@@ -35,14 +34,17 @@ public class BlockStateGenerator extends BlockStateProvider {
                         .build()
                 , BlockStateProperties.WATERLOGGED);
 
-        for (int i = 0; i < CrystalBlock.Size.values().length; i++)
+        for (CrystalBlock.Size size : CrystalBlock.Size.values())
         {
-            VariantBlockStateBuilder builder = getVariantBuilder(ModRegistry.CRYSTAL_BLOCKS.get(i).get());
-            builder.setModels(builder.partialState(),
-                    ConfiguredModel.builder().modelFile(models().getExistingFile(
-                            new ResourceLocation(CrystalGlass.MODID, "block/" + CrystalBlock.Size.values()[i].name().toLowerCase() + "_crystal"))
-                    ).build()
-            );
+            getVariantBuilder(ModRegistry.CRYSTAL_BLOCKS.get(size.ordinal()).get()).forAllStatesExcept(state -> ConfiguredModel.builder()
+                    .modelFile(
+                            models().getExistingFile(
+                                    new ResourceLocation(CrystalGlass.MODID, "block/" + size.name().toLowerCase() + "_crystal")
+                            )
+                    )
+                    .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 180) % 360)
+                    .rotationX(state.get(HorizontalFaceBlock.FACE).ordinal() * 90)
+                    .build(), BlockStateProperties.WATERLOGGED);
         }
     }
 }

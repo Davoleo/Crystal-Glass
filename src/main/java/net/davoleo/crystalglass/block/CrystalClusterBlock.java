@@ -1,6 +1,7 @@
 package net.davoleo.crystalglass.block;
 
 import net.davoleo.crystalglass.init.ModRegistry;
+import net.davoleo.crystalglass.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFaceBlock;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.server.ServerWorld;
 
@@ -51,35 +53,10 @@ public class CrystalClusterBlock extends CrystalBlock {
 
         for (int age = 0; age < 8; age++)
         {
-
-            double height = 4 + (age < 3 ? age : (age * 2) - 2);
-            double horizCoord1 = 6.5D - 0.5 * age;
-            double horizCoord2 = 9.5D + 0.5 * age;
-
-            for (int face = 0; face <= 6; face++)
-            {
-                switch (face)
-                {
-                    case 5:
-                        shapes[age][face] = Block.makeCuboidShape(horizCoord1, 0.0D, horizCoord1, horizCoord2, height, horizCoord2);
-                        break;
-                    case 4:
-                        shapes[age][face] = Block.makeCuboidShape(horizCoord1, 16.0D, horizCoord1, horizCoord2, 16 - height, horizCoord2);
-                        break;
-                    case 0:
-                        shapes[age][face] = Block.makeCuboidShape(horizCoord1, horizCoord1, 0.0D, horizCoord2, horizCoord2, height);
-                        break;
-                    case 2:
-                        shapes[age][face] = Block.makeCuboidShape(horizCoord1, horizCoord1, 16.0D, horizCoord2, horizCoord2, 16 - height);
-                        break;
-                    case 3:
-                        shapes[age][face] = Block.makeCuboidShape(0.0D, horizCoord1, horizCoord1, height, horizCoord2, horizCoord2);
-                        break;
-                    case 1:
-                        shapes[age][face] = Block.makeCuboidShape(16.0D, horizCoord1, horizCoord1, 16 - height, horizCoord2, horizCoord2);
-                        break;
-                }
-            }
+            float height = 4 + (age < 3 ? age : (age * 2) - 2);
+            float horizCoord1 = 6.5F - 0.5F * age;
+            float horizCoord2 = 9.5F + 0.5F * age;
+            shapes[age] = Utils.generateDirectionalVoxelShapes(new Vector3f(horizCoord1, 0, horizCoord1), new Vector3f(horizCoord2, height, horizCoord2));
         }
 
         return shapes;
@@ -94,7 +71,7 @@ public class CrystalClusterBlock extends CrystalBlock {
      */
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context)
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context)
     {
         int age = state.get(AGE);
         AttachFace face = state.get(HorizontalFaceBlock.FACE);
