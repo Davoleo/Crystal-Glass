@@ -1,0 +1,213 @@
+{
+  "block.crystal_block.break": {
+    "sounds": [
+      {
+        "name": "crystalglass:crystal/break1",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/break2",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/break3",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/break4",
+        "volume": 1
+      }
+    ]
+  },
+  "block.crystal_block.fall": {
+    "sounds": [
+      {
+        "name": "crystalglass:crystal/step1",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step2",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step3",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step4",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step5",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step6",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step7",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step8",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step9",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step10",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step11",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step12",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step14",
+        "volume": 1
+      }
+    ]
+  },
+  "block.crystal_block.hit": {
+    "sounds": [
+      {
+        "name": "crystalglass:crystal/step1",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step2",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step3",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step4",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step5",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step6",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step7",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step8",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step9",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step10",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step11",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step12",
+        "volume": 1
+      }
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.crystal_block.place": {
+    "sounds": [
+      {
+        "name": "crystalglass:crystal/place1",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/place2",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/place3",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/place4",
+        "volume": 1
+      }
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.crystal_block.step": {
+    "sounds": [
+      {
+        "name": "crystalglass:crystal/step1",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step2",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step3",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step4",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step5",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step6",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step7",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step8",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step9",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step10",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step11",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step12",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step13",
+        "volume": 1
+      },
+      {
+        "name": "crystalglass:crystal/step14",
+        "volume": 1
+      }
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  }
+}
