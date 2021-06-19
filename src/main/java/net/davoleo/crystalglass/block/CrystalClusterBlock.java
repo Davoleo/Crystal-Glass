@@ -34,7 +34,7 @@ import java.util.Random;
  */
 public class CrystalClusterBlock extends CrystalBlock {
 
-    private final VoxelShape[][] VOXEL_SHAPES;
+    private VoxelShape[][] VOXEL_SHAPES;
 
     public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
 
@@ -53,9 +53,18 @@ public class CrystalClusterBlock extends CrystalBlock {
 
         for (int age = 0; age < 4; age++)
         {
-            float height = 4 + (age < 3 ? age : (age * 2) - 2);
-            float horizCoord1 = 6.5F - 0.5F * age;
-            float horizCoord2 = 9.5F + 0.5F * age;
+            //Increase the age right away so that voxel boxes are increased of 2 pixels instead of 1
+            if (age == 3)
+                age++;
+            float horizCoord1 = 9F + age;
+            float horizCoord2 = 7F - age;
+
+            //Reset the hacky change made before
+            if (age > 3)
+                age = 3;
+
+            float height = 6 + (age > 1 ? age * age + 1 : 0);
+
             shapes[age] = Utils.generateDirectionalVoxelShapes(new Vector3f(horizCoord1, 0, horizCoord1), new Vector3f(horizCoord2, height, horizCoord2));
         }
 
@@ -63,7 +72,7 @@ public class CrystalClusterBlock extends CrystalBlock {
     }
 
     /**
-     * Will be called whenever mincraft needs to render the line around the block <br>
+     * Will be called whenever minecraft needs to render the line around the block <br>
      * (probably best not to do many calculations here)
      *
      * @param state The state of the block
@@ -76,6 +85,8 @@ public class CrystalClusterBlock extends CrystalBlock {
         int age = state.get(AGE);
         AttachFace face = state.get(HorizontalFaceBlock.FACE);
         Direction horizontalDirection = state.get(HORIZONTAL_FACING);
+
+        VOXEL_SHAPES = generateVoxelShapes();
 
         if (face == AttachFace.FLOOR)
             return VOXEL_SHAPES[age][5];
