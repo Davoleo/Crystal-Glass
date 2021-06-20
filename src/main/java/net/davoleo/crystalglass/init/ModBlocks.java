@@ -5,8 +5,6 @@ import net.davoleo.crystalglass.CrystalGlass;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -22,9 +20,7 @@ import java.util.function.Supplier;
  * <p>
  * It also initializes registry names automatically without needing to set them anywhere else in the mod
  */
-public class ModRegistry {
-
-    private static final Item.Properties DEFAULT_ITEM_PROPERTIES = new Item.Properties().group(CrystalGlass.CREATIVE_TAB);
+public class ModBlocks {
 
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CrystalGlass.MODID);
 
@@ -32,7 +28,6 @@ public class ModRegistry {
     public static void init()
     {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        Items.REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     //Registers the Crystal Cluster Block and its related BlockItem; TODO: this can be later rearranged to be way more polished less verbose
@@ -48,35 +43,4 @@ public class ModRegistry {
             CRYSTAL_BLOCKS.add(BLOCKS.register(blockPair.getLeft(), blockPair.getRight()));
         }
     }
-
-    public static class Items {
-        private static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, CrystalGlass.MODID);
-
-        private static <T extends Block> RegistryObject<Item> registerFromBlock(RegistryObject<T> block)
-        {
-            return REGISTER.register(block.getId().getPath(), () -> new BlockItem(block.get(), DEFAULT_ITEM_PROPERTIES));
-        }
-
-        public static final List<RegistryObject<Item>> CRYSTAL_CLUSTERS = Lists.newArrayListWithCapacity(8);
-
-        static
-        {
-            CrystalClusterBlock.AGE.getAllowedValues().forEach(age ->
-                    CRYSTAL_CLUSTERS.add(REGISTER.register(
-                            "crystal_cluster_age_" + age,
-                            () -> new BlockItem(CRYSTAL_CLUSTER_BLOCK.get(), DEFAULT_ITEM_PROPERTIES))
-                    )
-            );
-        }
-
-        public static final List<RegistryObject<Item>> CRYSTALS = Lists.newArrayListWithCapacity(CrystalBlock.Size.values().length);
-
-        static
-        {
-            for (CrystalBlock.Size size : CrystalBlock.Size.values())
-                CRYSTALS.add(registerFromBlock(CRYSTAL_BLOCKS.get(size.ordinal())));
-        }
-
-    }
-
 }

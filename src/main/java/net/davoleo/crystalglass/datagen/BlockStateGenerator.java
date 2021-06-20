@@ -3,7 +3,7 @@ package net.davoleo.crystalglass.datagen;
 import net.davoleo.crystalglass.CrystalGlass;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
-import net.davoleo.crystalglass.init.ModRegistry;
+import net.davoleo.crystalglass.init.ModBlocks;
 import net.minecraft.block.HorizontalFaceBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -22,7 +22,7 @@ public class BlockStateGenerator extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels()
     {
-        CrystalClusterBlock crystalCluster = ModRegistry.CRYSTAL_CLUSTER_BLOCK.get();
+        CrystalClusterBlock crystalCluster = ModBlocks.CRYSTAL_CLUSTER_BLOCK.get();
 
         //Register a directional block with an angle offset of 90 degrees and a different existing named model for each stage
         getVariantBuilder(crystalCluster).forAllStatesExcept(state -> ConfiguredModel.builder()
@@ -36,7 +36,7 @@ public class BlockStateGenerator extends BlockStateProvider {
 
         for (CrystalBlock.Size size : CrystalBlock.Size.values())
         {
-            getVariantBuilder(ModRegistry.CRYSTAL_BLOCKS.get(size.ordinal()).get()).forAllStatesExcept(state -> ConfiguredModel.builder()
+            getVariantBuilder(ModBlocks.CRYSTAL_BLOCKS.get(size.ordinal()).get()).forAllStatesExcept(state -> ConfiguredModel.builder()
                     .modelFile(
                             models().getExistingFile(
                                     new ResourceLocation(CrystalGlass.MODID, "block/" + size.name().toLowerCase() + "_crystal")

@@ -1,7 +1,8 @@
 package net.davoleo.crystalglass;
 
 import net.davoleo.crystalglass.init.ClientSetup;
-import net.davoleo.crystalglass.init.ModRegistry;
+import net.davoleo.crystalglass.init.ModBlocks;
+import net.davoleo.crystalglass.init.ModItems;
 import net.davoleo.crystalglass.init.ModSounds;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,7 @@ public class CrystalGlass {
         @Override
         public ItemStack createIcon()
         {
-            return new ItemStack(ModRegistry.CRYSTAL_CLUSTER_BLOCK.get());
+            return new ItemStack(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get());
         }
     };
 
@@ -36,8 +37,10 @@ public class CrystalGlass {
         //Called on the client side during mod setup
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
 
-        //Initializes the Item and Blocks Registry
-        ModRegistry.init();
+        //Initializes the Blocks Registry
+        ModBlocks.init();
+        //Initializes the Items Registry
+        ModItems.init();
         //Initializes the Sounds Registry
         ModSounds.init();
     }

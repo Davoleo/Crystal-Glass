@@ -1,6 +1,6 @@
 package net.davoleo.crystalglass.block;
 
-import net.davoleo.crystalglass.init.ModRegistry;
+import net.davoleo.crystalglass.init.ModItems;
 import net.davoleo.crystalglass.init.ModSounds;
 import net.davoleo.crystalglass.util.Utils;
 import net.minecraft.block.Block;
@@ -124,7 +124,7 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
         if (size == null)
             return super.getPickBlock(state, target, world, pos, player);
 
-        return new ItemStack(ModRegistry.Items.CRYSTALS.get(size.ordinal()).get());
+        return new ItemStack(ModItems.CRYSTALS.get(size.ordinal()).get());
     }
 
     @Override

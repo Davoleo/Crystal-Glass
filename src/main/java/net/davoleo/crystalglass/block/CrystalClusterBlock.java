@@ -1,6 +1,6 @@
 package net.davoleo.crystalglass.block;
 
-import net.davoleo.crystalglass.init.ModRegistry;
+import net.davoleo.crystalglass.init.ModItems;
 import net.davoleo.crystalglass.init.ModSounds;
 import net.davoleo.crystalglass.util.Utils;
 import net.minecraft.block.Block;
@@ -105,7 +105,7 @@ public class CrystalClusterBlock extends CrystalBlock {
     @Override
     public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player)
     {
-        return new ItemStack(ModRegistry.Items.CRYSTAL_CLUSTERS.get(state.get(AGE)).get());
+        return new ItemStack(ModItems.CRYSTAL_CLUSTERS.get(state.get(AGE)).get());
     }
 
     /**
