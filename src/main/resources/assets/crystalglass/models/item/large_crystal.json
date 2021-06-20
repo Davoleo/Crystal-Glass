@@ -1,4 +1,7 @@
 {
   "credit": "Made by AlleCraft",
-  "parent": "crystalglass:block/large_crystal"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "crystalglass:item/large_crystal"
+  }
 }

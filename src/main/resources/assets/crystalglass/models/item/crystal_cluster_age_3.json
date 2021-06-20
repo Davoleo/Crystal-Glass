@@ -1,4 +1,7 @@
 {
   "credit": "Made by AlleCraft",
-  "parent": "crystalglass:block/crystal_cluster_age_3"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "crystalglass:item/crystal_cluster_age_3"
+  }
 }
