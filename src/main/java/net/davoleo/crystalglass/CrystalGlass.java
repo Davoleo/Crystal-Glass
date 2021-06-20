@@ -47,5 +47,7 @@ public class CrystalGlass {
 
     private void setup(final FMLCommonSetupEvent event)
     {
+        LOGGER.info("Crystal Glass Setup Method...");
+        LOGGER.info("MMMH, MONKEY");
     }
 }
