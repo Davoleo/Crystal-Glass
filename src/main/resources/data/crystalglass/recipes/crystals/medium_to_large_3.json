@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "crystalglass:medium_crystal"
+    },
+    {
+      "item": "crystalglass:medium_crystal"
+    },
+    {
+      "item": "crystalglass:medium_crystal"
+    },
+    {
+      "item": "crystalglass:medium_crystal"
+    },
+    {
+      "item": "crystalglass:medium_crystal"
+    },
+    {
+      "item": "crystalglass:medium_crystal"
+    }
+  ],
+  "result": {
+    "item": "crystalglass:large_crystal",
+    "count": 3
+  }
+}
