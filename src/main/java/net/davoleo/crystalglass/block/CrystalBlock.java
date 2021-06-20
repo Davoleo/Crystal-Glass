@@ -1,7 +1,6 @@
 package net.davoleo.crystalglass.block;
 
 import net.davoleo.crystalglass.init.ModItems;
-import net.davoleo.crystalglass.init.ModSounds;
 import net.davoleo.crystalglass.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -83,12 +82,9 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
 
     private CrystalBlock(Size size)
     {
-        super(Utils.DEFAULT_ROCK_PROPERTIES
+        super(FullCrystalBlock.PROPERTIES
                 .setEmmisiveRendering((p1, p2, p3) -> true)
                 .setLightLevel(size::getLightLevel)
-                .setOpaque((p1, p2, p3) -> false)
-                .notSolid()
-                .sound(ModSounds.CRYSTAL_SOUND_TYPE)
         );
         this.size = size;
     }
@@ -98,12 +94,9 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
      */
     protected CrystalBlock(ToIntFunction<BlockState> stateLightFunction)
     {
-        super(Utils.DEFAULT_ROCK_PROPERTIES
+        super(FullCrystalBlock.PROPERTIES
                 .setEmmisiveRendering((p1, p2, p3) -> true)
                 .setLightLevel(stateLightFunction)
-                .setOpaque((p1, p2, p3) -> false)
-                .notSolid()
-                .sound(ModSounds.CRYSTAL_SOUND_TYPE)
         );
         this.size = null;
     }

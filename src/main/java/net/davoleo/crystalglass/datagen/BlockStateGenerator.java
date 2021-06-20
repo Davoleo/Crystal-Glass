@@ -34,6 +34,7 @@ public class BlockStateGenerator extends BlockStateProvider {
                         .build()
                 , BlockStateProperties.WATERLOGGED);
 
+        //Generate Crystal Blocks blockstates
         for (CrystalBlock.Size size : CrystalBlock.Size.values())
         {
             getVariantBuilder(ModBlocks.CRYSTAL_BLOCKS.get(size.ordinal()).get()).forAllStatesExcept(state -> ConfiguredModel.builder()
@@ -46,5 +47,10 @@ public class BlockStateGenerator extends BlockStateProvider {
                     .rotationX(state.get(HorizontalFaceBlock.FACE).ordinal() * 90)
                     .build(), BlockStateProperties.WATERLOGGED);
         }
+
+        //Generate Full Crystal Block blockstate
+        simpleBlock(ModBlocks.FULL_CRYSTAL_BLOCK.get(), models().getExistingFile(
+                new ResourceLocation(CrystalGlass.MODID, "block/crystal_block")
+        ));
     }
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import net.davoleo.crystalglass.CrystalGlass;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
+import net.davoleo.crystalglass.block.FullCrystalBlock;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -43,4 +44,6 @@ public class ModBlocks {
             CRYSTAL_BLOCKS.add(BLOCKS.register(blockPair.getLeft(), blockPair.getRight()));
         }
     }
+
+    public static final RegistryObject<FullCrystalBlock> FULL_CRYSTAL_BLOCK = BLOCKS.register("crystal_block", FullCrystalBlock::new);
 }

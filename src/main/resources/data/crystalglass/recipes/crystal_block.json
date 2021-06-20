@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "crystalglass:large_crystal"
+    }
+  },
+  "result": {
+    "item": "crystalglass:crystal_block",
+    "count": 4
+  }
+}

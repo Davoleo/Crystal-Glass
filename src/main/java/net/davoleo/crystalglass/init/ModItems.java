@@ -1,6 +1,5 @@
 package net.davoleo.crystalglass.init;
 
-import com.google.common.collect.Lists;
 import net.davoleo.crystalglass.CrystalGlass;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
@@ -12,6 +11,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModItems {
@@ -30,8 +30,7 @@ public class ModItems {
         return REGISTER.register(block.getId().getPath(), () -> new BlockItem(block.get(), DEFAULT_ITEM_PROPERTIES));
     }
 
-    public static final List<RegistryObject<Item>> CRYSTAL_CLUSTERS = Lists.newArrayListWithCapacity(8);
-
+    public static final List<RegistryObject<Item>> CRYSTAL_CLUSTERS = new ArrayList<>(CrystalClusterBlock.AGE.getAllowedValues().size());
     static
     {
         CrystalClusterBlock.AGE.getAllowedValues().forEach(age ->
@@ -42,12 +41,14 @@ public class ModItems {
         );
     }
 
-    public static final List<RegistryObject<Item>> CRYSTALS = Lists.newArrayListWithCapacity(CrystalBlock.Size.values().length);
+    public static final List<RegistryObject<Item>> CRYSTALS = new ArrayList<>(CrystalBlock.Size.values().length);
 
     static
     {
         for (CrystalBlock.Size size : CrystalBlock.Size.values())
             CRYSTALS.add(registerFromBlock(ModBlocks.CRYSTAL_BLOCKS.get(size.ordinal())));
     }
+
+    public static final RegistryObject<Item> CRYSTAL_ITEMBLOCK = registerFromBlock(ModBlocks.FULL_CRYSTAL_BLOCK);
 
 }

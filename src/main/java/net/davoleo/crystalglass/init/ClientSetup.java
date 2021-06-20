@@ -7,8 +7,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientSetup {
     public static void init(final FMLClientSetupEvent event)
     {
+        //Translucent Blocks
         ModBlocks.CRYSTAL_BLOCKS.forEach(crystal -> RenderTypeLookup.setRenderLayer(crystal.get(), RenderType.getTranslucent()));
         RenderTypeLookup.setRenderLayer(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.FULL_CRYSTAL_BLOCK.get(), RenderType.getTranslucent());
 
         // TODO: 30/03/2021 Temporary solution to ModRegistry group initialization (the other one always adds age 7 crystals)
         //NonNullList<ItemStack> creativeStacks = ModRegistry.Items.CRYSTAL_CLUSTERS
