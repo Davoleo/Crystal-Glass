@@ -1,6 +1,7 @@
 package net.davoleo.crystalglass.block;
 
 import net.davoleo.crystalglass.init.ModRegistry;
+import net.davoleo.crystalglass.init.ModSounds;
 import net.davoleo.crystalglass.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,13 +13,18 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nonnull;
@@ -128,6 +134,18 @@ public class CrystalClusterBlock extends CrystalBlock {
         state = state.with(AGE, Character.getNumericValue(age));
 
         return state;
+    }
+
+    /**
+     * Called when the block is activated through player right click (plays crystal chime sounds)
+     */
+    @SuppressWarnings("deprecation")
+    @Nonnull
+    @Override
+    public ActionResultType onBlockActivated(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit)
+    {
+        worldIn.playSound(null, pos, ModSounds.Events.CRYSTAL_SHIMMER.get(), SoundCategory.BLOCKS, 1F, 1F);
+        return ActionResultType.PASS;
     }
 
     /**

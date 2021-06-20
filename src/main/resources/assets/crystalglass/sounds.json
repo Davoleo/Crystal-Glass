@@ -19,6 +19,15 @@
       }
     ]
   },
+  "block.crystal_cluster_block.chime": {
+    "sounds": [
+      {
+        "name": "crystalglass:crystal/shimmer",
+        "volume": 0.2
+      }
+    ],
+    "subtitle": "subtitles.crystalglass.crystal_cluster_block.chime"
+  },
   "block.crystal_block.fall": {
     "sounds": [
       {

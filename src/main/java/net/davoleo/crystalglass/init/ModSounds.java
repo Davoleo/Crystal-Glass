@@ -26,7 +26,7 @@ public class ModSounds {
         public static final Supplier<SoundEvent> CRYSTAL_PLACE = () -> new SoundEvent(new ResourceLocation(CrystalGlass.MODID, "block.crystal_block.place"));
         public static final Supplier<SoundEvent> CRYSTAL_HIT = () -> new SoundEvent(new ResourceLocation(CrystalGlass.MODID, "block.crystal_block.hit"));
         public static final Supplier<SoundEvent> CRYSTAL_FALL = () -> new SoundEvent(new ResourceLocation(CrystalGlass.MODID, "block.crystal_block.fall"));
-        //public static final Supplier<SoundEvent> CRYSTAL_SHIMMER = () -> new SoundEvent(new ResourceLocation(CrystalGlass.MODID, "block.crystal_block.chime"));
+        public static final Supplier<SoundEvent> CRYSTAL_SHIMMER = () -> new SoundEvent(new ResourceLocation(CrystalGlass.MODID, "block.crystal_cluster_block.chime"));
 
         static
         {

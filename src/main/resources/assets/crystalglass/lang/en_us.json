@@ -3,5 +3,6 @@
   "block.crystalglass.crystal_cluster": "Crystal Cluster",
   "block.crystalglass.large_crystal": "Large Crystal",
   "block.crystalglass.medium_crystal": "Medium Crystal",
-  "block.crystalglass.small_crystal": "Small Crystal"
+  "block.crystalglass.small_crystal": "Small Crystal",
+  "subtitles.crystalglass.crystal_cluster_block.chime": "Crystal chimes"
 }
