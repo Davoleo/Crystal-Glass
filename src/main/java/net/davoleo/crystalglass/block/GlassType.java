@@ -7,10 +7,9 @@ public enum GlassType {
     NORMAL,
     CLEAR,
     BRIGHT,
-    BRIGHT_CLEAR,
+    GLOWING,
     ETHEREAL_PLAYER,
     ETHEREAL_ENTITIES,
-    OPAQUE,
-    UNBREAKABLE,
-    ;
+    OPAQUE,  //dark
+    UNBREAKABLE
 }

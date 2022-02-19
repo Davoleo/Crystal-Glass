@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "crystalglass:large_crystal"
+    },
+    {
+      "item": "crystalglass:large_crystal"
+    },
+    {
+      "item": "crystalglass:large_crystal"
+    },
+    {
+      "item": "crystalglass:large_crystal"
+    },
+    {
+      "item": "crystalglass:large_crystal"
+    },
+    {
+      "item": "crystalglass:large_crystal"
+    },
+    {
+      "item": "crystalglass:large_crystal"
+    },
+    {
+      "item": "crystalglass:large_crystal"
+    }
+  ],
+  "result": {
+    "item": "crystalglass:crystal_glass",
+    "count": 32
+  }
+}

@@ -7,16 +7,19 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFaceBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameterSets;
+import net.minecraft.loot.LootParameters;
+import net.minecraft.loot.LootTable;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
@@ -28,7 +31,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -119,14 +122,18 @@ public class CrystalClusterBlock extends CrystalBlock {
         stateBuilder.add(HORIZONTAL_FACING, HorizontalFaceBlock.FACE, AGE, WATERLOGGED);
     }
 
-    @Nullable
+    @Nonnull
     @Override
     public BlockState getStateForPlacement(@Nonnull BlockItemUseContext context)
     {
-        BlockState state = super.getStateForPlacement(context);
 
-        if (state == null)
-            return null;
+        BlockState state = super.getStateForPlacement(context);
+        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
+        if (fluidstate.isTagged(FluidTags.WATER))
+        {
+            state = state.with(WATERLOGGED, true);
+        }
+
 
         //Set the age state
         String itemName = context.getItem().getItem().getRegistryName().getPath();
@@ -144,30 +151,51 @@ public class CrystalClusterBlock extends CrystalBlock {
     @Override
     public ActionResultType onBlockActivated(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit)
     {
-        worldIn.playSound(null, pos, ModSounds.Events.CRYSTAL_SHIMMER.get(), SoundCategory.BLOCKS, 1F, 1F);
-        return ActionResultType.PASS;
+        worldIn.playSound(null, pos, ModSounds.Events.CRYSTAL_SHIMMER.get(), SoundCategory.BLOCKS, 4F, 1F);
+        return ActionResultType.func_233537_a_(worldIn.isRemote);
     }
 
-    /**
-     * Used in crops blocks to make them grow, is called randomly once in a while
-     *
-     * @param state the current block state
-     * @param world the world this block is in
-     * @param pos   the position this block is at
-     */
+
+    @Deprecated
     @Override
-    public void randomTick(BlockState state, @Nonnull ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random)
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
     {
         int age = state.get(AGE);
-        //boolean waterlogged = state.get(WATERLOGGED);
+        boolean waterlogged = state.get(WATERLOGGED);
         if (age < 3)
         {
             //Prev 30 and 15
-            if (random.nextInt(6) == 0)
+            if (random.nextInt(waterlogged ? 2 : 4) == 0)
                 world.setBlockState(pos, state.with(AGE, age + 1), 2);
+        } else
+        {
+            if (waterlogged)
+            {
+                world.setBlockState(pos, state.with(AGE, age - random.nextInt(3)), 3);
+            }
+            if (!world.isRemote)
+            {
+                ResourceLocation resourcelocation = new ResourceLocation("crystalglass:blocks/waterlogged_crystal_cluster_automated");
+
+                LootContext.Builder builder = (new LootContext.Builder((ServerWorld) world)).withRandom(RANDOM);
+                //.withParameter(LootParameters.field_237457_g_, Vector3d.copyCentered(pos)).withParameter(LootParameters.TOOL, ItemStack.EMPTY);
+                LootContext lootcontext = builder.withParameter(LootParameters.BLOCK_STATE, state).build(LootParameterSets.BLOCK);
+                ServerWorld serverworld = lootcontext.getWorld();
+                LootTable loottable = serverworld.getServer().getLootTableManager().getLootTableFromLocation(resourcelocation);
+                List<ItemStack> lootTableItems = loottable.generate(lootcontext);
+
+                for (ItemStack stack : lootTableItems)
+                {
+                    spawnAsEntity(world, pos, stack);
+                }
+            }
+
+            world.playSound((PlayerEntity) null, pos, (SoundEvent) ModSounds.Events.CRYSTAL_SHIMMER.get(), SoundCategory.BLOCKS, 4F, 1.5F + world.rand.nextFloat() * 0.4F);
         }
     }
 
+
+    @Nonnull
     @Override
     public boolean isTransparent(@Nonnull BlockState state)
     {
@@ -175,13 +203,15 @@ public class CrystalClusterBlock extends CrystalBlock {
     }
 
     /**
-     * Should tick randomly to grow only if the age state is below 7
+     * Should tick randomly to grow only if the age state is below 3
      *
      * @return if it randomly ticks
      */
     @Override
     public boolean ticksRandomly(BlockState state)
     {
-        return state.get(AGE) < 3;
+        return state.get(AGE) < 3 || state.get(WATERLOGGED);
     }
+
+
 }

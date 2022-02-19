@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "crystalglass:large_crystal",
+    "crystalglass:medium_crystal",
+    "crystalglass:small_crystal"
+  ]
+}

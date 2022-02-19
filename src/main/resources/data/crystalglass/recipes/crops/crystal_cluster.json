@@ -1,0 +1,29 @@
+{
+  "type": "botanypots:crop",
+  "seed": {
+    "tag": "crystalglass:crystal_clusters"
+  },
+  "categories": [
+    "water"
+  ],
+  "growthTicks": 600,
+  "display": [
+    {
+      "block": "crystalglass:crystal_cluster",
+      "properties": {
+        "age": 3,
+        "renderFluid": false
+      }
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.75,
+      "output": {
+        "item": "crystalglass:large_crystal"
+      },
+      "minRolls": 1,
+      "maxRolls": 2
+    }
+  ]
+}
