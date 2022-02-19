@@ -7,11 +7,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;

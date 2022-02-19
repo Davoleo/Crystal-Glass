@@ -5,12 +5,12 @@ import net.davoleo.crystalglass.CrystalGlass;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.davoleo.crystalglass.block.FullCrystalBlock;
-import net.minecraft.block.Block;
-import net.minecraft.item.DyeColor;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -60,7 +60,7 @@ public class ModBlocks {
         for (DyeColor color : DyeColor.values())
         {
 
-            String name = "crystal_block_" + color.getTranslationKey();
+            String name = "crystal_block_" + color.getSerializedName();
 
             RegistryObject<FullCrystalBlock> CRYSTALBLOCK_DYE = REGISTER.register(name, FullCrystalBlock::new);
 

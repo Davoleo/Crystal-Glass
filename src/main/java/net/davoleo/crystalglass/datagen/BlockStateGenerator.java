@@ -4,11 +4,11 @@ import net.davoleo.crystalglass.CrystalGlass;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.davoleo.crystalglass.init.ModBlocks;
-import net.minecraft.block.HorizontalFaceBlock;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.DyeColor;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -28,10 +28,10 @@ public class BlockStateGenerator extends BlockStateProvider {
         //Register a directional block with an angle offset of 90 degrees and a different existing named model for each stage
         getVariantBuilder(crystalCluster).forAllStatesExcept(state -> ConfiguredModel.builder()
                         .modelFile(models().getExistingFile(
-                                new ResourceLocation(CrystalGlass.MODID, "block/crystal_cluster_age_" + state.get(CrystalClusterBlock.AGE))
+                                new ResourceLocation(CrystalGlass.MODID, "block/crystal_cluster_age_" + state.getValue(CrystalClusterBlock.AGE))
                         ))
-                        .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 180) % 360)
-                        .rotationX(state.get(HorizontalFaceBlock.FACE).ordinal() * 90)
+                        .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                        .rotationX(state.getValue(FaceAttachedHorizontalDirectionalBlock.FACE).ordinal() * 90)
                         .build()
                 , BlockStateProperties.WATERLOGGED);
 
@@ -44,8 +44,8 @@ public class BlockStateGenerator extends BlockStateProvider {
                                     new ResourceLocation(CrystalGlass.MODID, "block/" + size.name().toLowerCase() + "_crystal")
                             )
                     )
-                    .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 180) % 360)
-                    .rotationX(state.get(HorizontalFaceBlock.FACE).ordinal() * 90)
+                    .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                    .rotationX(state.getValue(FaceAttachedHorizontalDirectionalBlock.FACE).ordinal() * 90)
                     .build(), BlockStateProperties.WATERLOGGED);
         }
         {
@@ -53,7 +53,7 @@ public class BlockStateGenerator extends BlockStateProvider {
             {
                 //Generate Full Crystal Block blockstate
                 simpleBlock(ModBlocks.FULL_CRYSTAL_BLOCKS.get(color).get(), models().getExistingFile(
-                        new ResourceLocation(CrystalGlass.MODID, "block/crystal_block_" + (color == null ? "" : "" + color.getTranslationKey()))
+                        new ResourceLocation(CrystalGlass.MODID, "block/crystal_block_" + (color == null ? "" : "" + color.getSerializedName()))
                 ));
             }
         }

@@ -1,11 +1,20 @@
 buildscript {
     repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
+        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
+        maven {
+            name 'Forge'
+            url 'https://maven.minecraftforge.net'
+        }
         mavenCentral()
-        gradlePluginPortal()
+
+        maven {
+            name 'ParchmentMC'
+            url 'https://maven.parchmentmc.org'
+        }
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 
@@ -18,11 +27,13 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
+apply plugin: org.parchmentmc.librarian.forgegradle.LibrarianForgeGradlePlugin
+
 version = '1.0'
 group = 'net.davoleo'
 archivesBaseName = 'crystalglass'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 configurations {
     shade
@@ -36,7 +47,7 @@ minecraft {
     // stable     #          Stables are built at the discretion of the MCP team.
     // official   MCVersion  Official field/method names from Mojang mapping files
     //mappings channel: 'official', version: '1.16.5'
-    mappings channel: 'snapshot', version: '20210309-1.16.5'
+    mappings channel: 'parchment', version: '2021.12.19-1.18.1'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -101,16 +112,17 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
-        url('https://maven.tterrag.com/')
+        name = 'tterrag'
+        url = 'https://maven.tterrag.com/'
     }
     mavenLocal()
 }
 
 dependencies {
 
-    minecraft "net.minecraftforge:forge:$minecraft_version-36.2.8"
+    minecraft "net.minecraftforge:forge:$minecraft_version-39.0.79"
 
-    def registrate = "com.tterrag.registrate:Registrate:MC$minecraft_version-1.0.10"
+    def registrate = "com.tterrag.registrate:Registrate:MC1.18-1.0.21"
     implementation(fg.deobf(registrate))
     shade(registrate)
 

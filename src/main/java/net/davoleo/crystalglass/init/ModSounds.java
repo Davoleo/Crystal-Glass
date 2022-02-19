@@ -1,9 +1,9 @@
 package net.davoleo.crystalglass.init;
 
 import net.davoleo.crystalglass.CrystalGlass;
-import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;

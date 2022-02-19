@@ -2,38 +2,41 @@ package net.davoleo.crystalglass.block;
 
 import net.davoleo.crystalglass.init.ModItems;
 import net.davoleo.crystalglass.util.Utils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFaceBlock;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.AttachFace;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
-public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable {
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+
+public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock implements SimpleWaterloggedBlock {
 
     protected static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     protected static final BooleanProperty UP = BlockStateProperties.UP;
@@ -41,13 +44,13 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
 
 
     public enum Size {
-        SMALL(new Vector3f(7, 0, 7), new Vector3f(9, 8, 9)),
-        MEDIUM(new Vector3f(6.5F, 0, 6.5F), new Vector3f(9.5F, 12, 9.5F)),
-        LARGE(new Vector3f(6, 0, 6), new Vector3f(10, 16, 10));
+        SMALL(new Vec3(7, 0, 7), new Vec3(9, 8, 9)),
+        MEDIUM(new Vec3(6.5, 0, 6.5), new Vec3(9.5, 12, 9.5)),
+        LARGE(new Vec3(6, 0, 6), new Vec3(10, 16, 10));
 
         private final VoxelShape[] shapes;
 
-        Size(Vector3f shapeStart, Vector3f shapeEnd)
+        Size(Vec3 shapeStart, Vec3 shapeEnd)
         {
             shapes = Utils.generateDirectionalVoxelShapes(shapeStart, shapeEnd);
         }
@@ -68,7 +71,7 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
             if (attachFace == AttachFace.FLOOR)
                 return shapes[5];
 
-            int horizIndex = direction.getHorizontalIndex();
+            int horizIndex = direction.get2DDataValue();
             if (horizIndex != -1)
             {
                 return shapes[horizIndex];
@@ -90,8 +93,8 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
     private CrystalBlock(Size size)
     {
         super(FullCrystalBlock.PROPERTIES
-                .setEmmisiveRendering((p1, p2, p3) -> true)
-                .setLightLevel(size::getLightLevel)
+                .emissiveRendering((p1, p2, p3) -> true)
+                .lightLevel(size::getLightLevel)
         );
         this.size = size;
     }
@@ -102,52 +105,53 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
     protected CrystalBlock(ToIntFunction<BlockState> stateLightFunction)
     {
         super(FullCrystalBlock.PROPERTIES
-                .setEmmisiveRendering((p1, p2, p3) -> true)
-                .setLightLevel(stateLightFunction)
+                .emissiveRendering((p1, p2, p3) -> true)
+                .lightLevel(stateLightFunction)
         );
         this.size = null;
     }
 
+    @ParametersAreNonnullByDefault
     @Nonnull
     @Override
-    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context)
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context)
     {
         if (size != null)
-            return size.getCrystalShape(state.get(BlockStateProperties.HORIZONTAL_FACING), state.get(HorizontalFaceBlock.FACE));
+            return size.getCrystalShape(state.getValue(HORIZONTAL_FACING), state.getValue(FaceAttachedHorizontalDirectionalBlock.FACE));
         else
             return super.getShape(state, worldIn, pos, context);
     }
 
     @Override
-    public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player)
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player)
     {
         if (size == null)
-            return super.getPickBlock(state, target, world, pos, player);
+            return super.getCloneItemStack(state, target, world, pos, player);
 
         return new ItemStack(ModItems.CRYSTALS.get(size.ordinal()).get());
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        builder.add(HORIZONTAL_FACING, HorizontalFaceBlock.FACE, WATERLOGGED, UP, DOWN);
+        builder.add(HORIZONTAL_FACING, FaceAttachedHorizontalDirectionalBlock.FACE, WATERLOGGED, UP, DOWN);
     }
-
 
     @Nullable
-    public BlockState getStateForPlacement(BlockItemUseContext context)
+    public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context)
     {
         BlockState state = super.getStateForPlacement(context);
-        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
-        BlockPos pos = context.getPos();
-        World world = context.getWorld();
-        BlockState up = world.getBlockState(pos.up());
-        state = state.with(UP, up.getBlock() == state.getBlock());
-        BlockState down = world.getBlockState(pos.down());
-        state = state.with(DOWN, down.getBlock() == state.getBlock());
-        return state.with(WATERLOGGED, fluidstate.isTagged(FluidTags.WATER) && fluidstate.getLevel() == 8);
-    }
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
 
+        FluidState fluidstate = world.getFluidState(pos);
+        BlockState up = world.getBlockState(pos.above());
+        state = state.setValue(UP, up.getBlock() == state.getBlock());
+
+        BlockState down = world.getBlockState(pos.below());
+        state = state.setValue(DOWN, down.getBlock() == state.getBlock());
+        return state.setValue(WATERLOGGED, fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8);
+    }
 
     /**
      * @return the state of the fluid inside of the block if it's waterlogged
@@ -155,17 +159,20 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
     @Nonnull
     public FluidState getFluidState(BlockState state)
     {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
+    public boolean isValidSpawn(BlockState state, BlockGetter world, BlockPos pos, SpawnPlacements.Type type, EntityType<?> entityType)
     {
         return true;
     }
 
+    /*
+    @ParametersAreNonnullByDefault
+    @Nonnull
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos)
     {
         if (stateIn.get(WATERLOGGED))
         {
@@ -175,12 +182,14 @@ public class CrystalBlock extends HorizontalFaceBlock implements IWaterLoggable 
         if (facing == Direction.UP)
         {
             newState = newState.with(UP, facingState.getBlock() == stateIn.getBlock());
-        } else if (facing == Direction.DOWN)
+        }
+        else if (facing == Direction.DOWN)
         {
             newState = newState.with(DOWN, facingState.getBlock() == stateIn.getBlock());
         }
         return newState;
     }
+*/
 
 
 }

@@ -1,20 +1,20 @@
 package net.davoleo.crystalglass.util;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class Utils {
 
-    public static final AbstractBlock.Properties DEFAULT_ROCK_PROPERTIES =
-            AbstractBlock.Properties.create(Material.ROCK)
-                    .harvestTool(ToolType.PICKAXE)
-                    .hardnessAndResistance(0.8F, 9);
+    public static final Block.Properties DEFAULT_ROCK_PROPERTIES =
+            Block.Properties.of(Material.STONE)
+                    .requiresCorrectToolForDrops()
+                    .strength(0.8F, 9);
 
-    public static VoxelShape[] generateDirectionalVoxelShapes(Vector3f shapeStart, Vector3f shapeEnd)
+    //IntelliJ, listen, I know it's sussy, but I have to do it
+    @SuppressWarnings("SuspiciousNameCombination")
+    public static VoxelShape[] generateDirectionalVoxelShapes(Vec3 shapeStart, Vec3 shapeEnd)
     {
         VoxelShape[] shapes = new VoxelShape[6];
         //S-W-N-E
@@ -24,27 +24,27 @@ public class Utils {
             {
                 //South: Swap Z and Y Coordinates
                 case 0:
-                    shapes[face] = Block.makeCuboidShape(shapeStart.getX(), shapeStart.getZ(), shapeStart.getY(), shapeEnd.getX(), shapeEnd.getZ(), shapeEnd.getY());
+                    shapes[face] = Block.box(shapeStart.x, shapeStart.z, shapeStart.y, shapeEnd.x, shapeEnd.z, shapeEnd.y);
                     break;
                 //North: Swap Z and (16 - Y) Coordinates
                 case 2:
-                    shapes[face] = Block.makeCuboidShape(shapeStart.getX(), shapeStart.getZ(), 16 - shapeStart.getY(), shapeEnd.getX(), shapeEnd.getZ(), 16 - shapeEnd.getY());
+                    shapes[face] = Block.box(shapeStart.x, shapeStart.z, 16 - shapeStart.y, shapeEnd.x, shapeEnd.z, 16 - shapeEnd.y);
                     break;
                 //East: Swap X and Y Coordinates
                 case 3:
-                    shapes[face] = Block.makeCuboidShape(shapeStart.getY(), shapeStart.getX(), shapeStart.getZ(), shapeEnd.getY(), shapeEnd.getX(), shapeEnd.getZ());
+                    shapes[face] = Block.box(shapeStart.y, shapeStart.x, shapeStart.z, shapeEnd.y, shapeEnd.x, shapeEnd.z);
                     break;
                 //West: Swap X and (16 - Y) Coordinates
                 case 1:
-                    shapes[face] = Block.makeCuboidShape(16 - shapeStart.getY(), shapeStart.getX(), shapeStart.getZ(), 16 - shapeEnd.getY(), shapeEnd.getX(), shapeEnd.getZ());
+                    shapes[face] = Block.box(16 - shapeStart.y, shapeStart.x, shapeStart.z, 16 - shapeEnd.y, shapeEnd.x, shapeEnd.z);
                     break;
                 //Attach Face: Floor (Default no transform)
                 case 5:
-                    shapes[face] = Block.makeCuboidShape(shapeStart.getX(), shapeStart.getY(), shapeStart.getZ(), shapeEnd.getX(), shapeEnd.getY(), shapeEnd.getZ());
+                    shapes[face] = Block.box(shapeStart.x, shapeStart.y, shapeStart.z, shapeEnd.x, shapeEnd.y, shapeEnd.z);
                     break;
                 //Attach Face: Ceiling (16 - Y) [invert vertical coordinates]
                 case 4:
-                    shapes[face] = Block.makeCuboidShape(shapeStart.getX(), 16 - shapeStart.getY(), shapeStart.getZ(), shapeEnd.getX(), 16 - shapeEnd.getY(), shapeEnd.getZ());
+                    shapes[face] = Block.box(shapeStart.x, 16 - shapeStart.y, shapeStart.z, shapeEnd.x, 16 - shapeEnd.y, shapeEnd.z);
                     break;
             }
         }
