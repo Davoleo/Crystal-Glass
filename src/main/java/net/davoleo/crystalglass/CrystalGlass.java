@@ -1,9 +1,7 @@
 package net.davoleo.crystalglass;
 
-import net.davoleo.crystalglass.init.ClientSetup;
-import net.davoleo.crystalglass.init.ModBlocks;
-import net.davoleo.crystalglass.init.ModItems;
-import net.davoleo.crystalglass.init.ModSounds;
+import com.tterrag.registrate.Registrate;
+import net.davoleo.crystalglass.init.*;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
@@ -30,6 +28,9 @@ public class CrystalGlass {
         }
     };
 
+    public static final Registrate REGISTRATE = Registrate.create(MODID);
+
+    @SuppressWarnings("InstantiationOfUtilityClass")
     public CrystalGlass()
     {
         //Called on both sides during mod setup
@@ -38,9 +39,11 @@ public class CrystalGlass {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
 
         //Initializes the Blocks Registry
-        ModBlocks.init();
+        new ModBlocks();
         //Initializes the Items Registry
-        ModItems.init();
+        new ModItems();
+        //Initializes the Fluids Registry
+        new ModFluids();
         //Initializes the Sounds Registry
         ModSounds.init();
     }

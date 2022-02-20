@@ -42,7 +42,6 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
     protected static final BooleanProperty UP = BlockStateProperties.UP;
     protected static final BooleanProperty DOWN = BlockStateProperties.DOWN;
 
-
     public enum Size {
         SMALL(new Vec3(7, 0, 7), new Vec3(9, 8, 9)),
         MEDIUM(new Vec3(6.5, 0, 6.5), new Vec3(9.5, 12, 9.5)),
