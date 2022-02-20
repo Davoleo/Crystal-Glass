@@ -4,8 +4,8 @@ import net.davoleo.crystalglass.init.ClientSetup;
 import net.davoleo.crystalglass.init.ModBlocks;
 import net.davoleo.crystalglass.init.ModItems;
 import net.davoleo.crystalglass.init.ModSounds;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -21,10 +21,10 @@ public class CrystalGlass {
     public static final String MODID = "crystalglass";
     public static final String MODNAME = "Crystal Glass";
 
-    public static final ItemGroup CREATIVE_TAB = new ItemGroup(MODID) {
+    public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(MODID) {
         @Nonnull
         @Override
-        public ItemStack createIcon()
+        public ItemStack makeIcon()
         {
             return new ItemStack(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get());
         }

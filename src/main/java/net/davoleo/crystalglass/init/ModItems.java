@@ -3,11 +3,11 @@ package net.davoleo.crystalglass.init;
 import net.davoleo.crystalglass.CrystalGlass;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.DyeColor;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class ModItems {
 
-    private static final Item.Properties DEFAULT_ITEM_PROPERTIES = new Item.Properties().group(CrystalGlass.CREATIVE_TAB);
+    private static final Item.Properties DEFAULT_ITEM_PROPERTIES = new Item.Properties().tab(CrystalGlass.CREATIVE_TAB);
 
     private static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, CrystalGlass.MODID);
 
@@ -34,11 +34,11 @@ public class ModItems {
         return REGISTER.register(block.getId().getPath(), () -> new BlockItem(block.get(), DEFAULT_ITEM_PROPERTIES));
     }
 
-    public static final List<RegistryObject<Item>> CRYSTAL_CLUSTERS = new ArrayList<>(CrystalClusterBlock.AGE.getAllowedValues().size());
+    public static final List<RegistryObject<Item>> CRYSTAL_CLUSTERS = new ArrayList<>(CrystalClusterBlock.AGE.getPossibleValues().size());
 
     static
     {
-        CrystalClusterBlock.AGE.getAllowedValues().forEach(age ->
+        CrystalClusterBlock.AGE.getPossibleValues().forEach(age ->
                 CRYSTAL_CLUSTERS.add(REGISTER.register(
                         "crystal_cluster_age_" + age,
                         () -> new BlockItem(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get(), DEFAULT_ITEM_PROPERTIES))
@@ -64,7 +64,7 @@ public class ModItems {
     }
 
     public static final RegistryObject<Item> CRYSTAL_BUCKET = REGISTER.register("molten_crystal_bucket",
-            () -> new BucketItem(ModFluids.MOLTEN_CRYSTAL, new Item.Properties().maxStackSize(1))
+            () -> new BucketItem(ModFluids.MOLTEN_CRYSTAL, new Item.Properties().stacksTo(1))
     );
 
 }

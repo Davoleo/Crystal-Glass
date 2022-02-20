@@ -1,27 +1,26 @@
 package net.davoleo.crystalglass.init;
 
 import net.davoleo.crystalglass.block.FullCrystalBlock;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ClientSetup {
     public static void init(final FMLClientSetupEvent event)
     {
         //Translucent Blocks
-        ModBlocks.CRYSTAL_BLOCKS.forEach(crystal -> RenderTypeLookup.setRenderLayer(crystal.get(), RenderType.getTranslucent()));
+        ModBlocks.CRYSTAL_BLOCKS.forEach(crystal -> ItemBlockRenderTypes.setRenderLayer(crystal.get(), RenderType.translucent()));
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get(), RenderType.getTranslucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get(), RenderType.translucent());
         for (RegistryObject<FullCrystalBlock> block : ModBlocks.FULL_CRYSTAL_BLOCKS.values())
         {
-            RenderTypeLookup.setRenderLayer(block.get(), RenderType.getTranslucent());
+            ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.translucent());
         }
 
-        RenderTypeLookup.setRenderLayer(ModFluids.MOLTEN_CRYSTAL.get(), RenderType.getTranslucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.MOLTEN_CRYSTAL.get(), RenderType.translucent());
         //RenderTypeLookup.setRenderLayer(ModFluids.CRYSTAL_BLOCK.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModFluids.MOLTEN_CRYSTAL_FLOW.get(), RenderType.getTranslucent());
-
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.MOLTEN_CRYSTAL_FLOW.get(), RenderType.translucent());
     }
 
 

@@ -48,14 +48,13 @@ public class BlockStateGenerator extends BlockStateProvider {
                     .rotationX(state.getValue(FaceAttachedHorizontalDirectionalBlock.FACE).ordinal() * 90)
                     .build(), BlockStateProperties.WATERLOGGED);
         }
+
+        for (DyeColor color : ModBlocks.FULL_CRYSTAL_BLOCKS.keySet())
         {
-            for (DyeColor color : ModBlocks.FULL_CRYSTAL_BLOCKS.keySet())
-            {
-                //Generate Full Crystal Block blockstate
-                simpleBlock(ModBlocks.FULL_CRYSTAL_BLOCKS.get(color).get(), models().getExistingFile(
-                        new ResourceLocation(CrystalGlass.MODID, "block/crystal_block_" + (color == null ? "" : "" + color.getSerializedName()))
-                ));
-            }
+            //Generate Full Crystal Block blockstate
+            simpleBlock(ModBlocks.FULL_CRYSTAL_BLOCKS.get(color).get(), models().getExistingFile(
+                    new ResourceLocation(CrystalGlass.MODID, "block/crystal_block_" + (color == null ? "" : "" + color.getSerializedName()))
+            ));
         }
     }
 }
