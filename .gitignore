@@ -27,3 +27,6 @@ forge*changelog.txt
 
 # data gen cache
 src/generated/resources/.cache
+
+# Random Sketches
+/sketches/
