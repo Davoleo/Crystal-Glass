@@ -1,7 +1,7 @@
 package net.davoleo.crystalglass.block;
 
 import net.davoleo.crystalglass.init.ModItems;
-import net.davoleo.crystalglass.util.Utils;
+import net.davoleo.crystalglass.util.ShapeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -81,7 +81,7 @@ public class CrystalClusterBlock extends CrystalBlock {
 
             float height = 6 + (age > 1 ? age * age + 1 : 0);
 
-            shapes[age] = Utils.generateDirectionalVoxelShapes(new Vec3(horizCoord1, 0, horizCoord1), new Vec3(horizCoord2, height, horizCoord2));
+            shapes[age] = ShapeUtils.generateDirectionalVoxelShapes(new Vec3(horizCoord1, 0, horizCoord1), new Vec3(horizCoord2, height, horizCoord2));
         }
 
         return shapes;

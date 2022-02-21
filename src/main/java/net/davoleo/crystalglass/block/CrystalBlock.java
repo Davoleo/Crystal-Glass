@@ -1,7 +1,7 @@
 package net.davoleo.crystalglass.block;
 
 import net.davoleo.crystalglass.init.ModItems;
-import net.davoleo.crystalglass.util.Utils;
+import net.davoleo.crystalglass.util.ShapeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -51,7 +51,7 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
 
         Size(Vec3 shapeStart, Vec3 shapeEnd)
         {
-            shapes = Utils.generateDirectionalVoxelShapes(shapeStart, shapeEnd);
+            shapes = ShapeUtils.generateDirectionalVoxelShapes(shapeStart, shapeEnd);
         }
 
         /**
