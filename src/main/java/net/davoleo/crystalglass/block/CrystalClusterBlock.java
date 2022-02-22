@@ -34,6 +34,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Random;
@@ -118,6 +119,7 @@ public class CrystalClusterBlock extends CrystalBlock {
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player)
     {
+        //return new ItemStack(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get());
         return new ItemStack(ModItems.CRYSTAL_CLUSTERS.get(state.getValue(AGE)).get());
     }
 
@@ -132,13 +134,16 @@ public class CrystalClusterBlock extends CrystalBlock {
         stateBuilder.add(HORIZONTAL_FACING, FaceAttachedHorizontalDirectionalBlock.FACE, AGE, WATERLOGGED);
     }
 
-    @Nonnull
+    @Nullable
     @Override
     public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context)
     {
-
         BlockState state = super.getStateForPlacement(context);
         FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
+
+        if (state == null)
+            return null;
+
         if (fluidstate.is(FluidTags.WATER))
         {
             state = state.setValue(WATERLOGGED, true);

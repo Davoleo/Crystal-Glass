@@ -2,6 +2,7 @@ package net.davoleo.crystalglass.init;
 
 import com.google.common.collect.Lists;
 import com.tterrag.registrate.util.entry.RegistryEntry;
+import net.davoleo.crystalglass.CrystalGlass;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.davoleo.crystalglass.block.FullCrystalBlock;
@@ -34,7 +35,6 @@ public class ModBlocks {
                     .register();
 
     public static final List<RegistryEntry<CrystalBlock>> CRYSTAL_BLOCKS = Lists.newArrayListWithCapacity(CrystalBlock.Size.values().length);
-
     static
     {
         for (CrystalBlock.Size size : CrystalBlock.Size.values())
@@ -44,7 +44,11 @@ public class ModBlocks {
                     REGISTRATE.object(blockPair.getLeft())
                             .block(Block.class, props -> blockPair.getRight().get())
                             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                            .simpleItem()
+                            .item()
+                            .defaultLang()
+                            .defaultModel()
+                            .tab(() -> CrystalGlass.CREATIVE_TAB)
+                            .build()
                             .register()
             );
         }

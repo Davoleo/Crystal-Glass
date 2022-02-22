@@ -137,22 +137,28 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        builder.add(HORIZONTAL_FACING, FaceAttachedHorizontalDirectionalBlock.FACE, WATERLOGGED, UP, DOWN);
+        builder.add(HORIZONTAL_FACING, FaceAttachedHorizontalDirectionalBlock.FACE, WATERLOGGED);
     }
 
     @Nullable
     public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context)
     {
         BlockState state = super.getStateForPlacement(context);
-        Level world = context.getLevel();
-        BlockPos pos = context.getClickedPos();
 
-        FluidState fluidstate = world.getFluidState(pos);
+        if (state == null)
+            return null;
+
+        /*
         BlockState up = world.getBlockState(pos.above());
         state = state.setValue(UP, up.getBlock() == state.getBlock());
 
         BlockState down = world.getBlockState(pos.below());
         state = state.setValue(DOWN, down.getBlock() == state.getBlock());
+        */
+
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        FluidState fluidstate = world.getFluidState(pos);
         return state.setValue(WATERLOGGED, fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8);
     }
 
@@ -171,28 +177,30 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
         return true;
     }
 
-    /*
+/*
     @ParametersAreNonnullByDefault
     @Nonnull
     @Override
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos)
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos)
     {
-        if (stateIn.get(WATERLOGGED))
-        {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
-        }
-        BlockState newState = super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        //if (stateIn.getValue(WATERLOGGED))
+        //    world.scheduleTick(currentPos, Fluids.WATER.getSource(), Fluids.WATER.getTickDelay(world));
+
+        /*
+        BlockState newState = super.updateShape(stateIn, facing, facingState, world, currentPos, facingPos);
         if (facing == Direction.UP)
         {
-            newState = newState.with(UP, facingState.getBlock() == stateIn.getBlock());
+            newState = newState.setValue(UP, facingState.getBlock() == stateIn.getBlock());
         }
         else if (facing == Direction.DOWN)
         {
-            newState = newState.with(DOWN, facingState.getBlock() == stateIn.getBlock());
+            newState = newState.setValue(DOWN, facingState.getBlock() == stateIn.getBlock());
         }
         return newState;
+         *-/
+        return super.updateShape(stateIn, facing, facingState, world, currentPos, facingPos);
     }
-*/
+ */
 
 
 }

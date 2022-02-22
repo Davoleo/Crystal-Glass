@@ -6,11 +6,14 @@ import net.davoleo.crystalglass.CrystalGlass;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static net.davoleo.crystalglass.CrystalGlass.REGISTRATE;
 
@@ -34,9 +37,8 @@ public class ModItems {
         );
     }
 
-    public static final List<RegistryObject<Item>> CRYSTALS = new ArrayList<>(CrystalBlock.Size.values().length);
+    public static final List<RegistryEntry<Item>> CRYSTALS = new ArrayList<>(CrystalBlock.Size.values().length);
 
-/*
     public static final Map<DyeColor, RegistryObject<Item>> CRYSTALS_BLOCK_ITEMS = new HashMap<>();
     static
     {
@@ -49,5 +51,5 @@ public class ModItems {
         }
 
     }
- */
+
 }
