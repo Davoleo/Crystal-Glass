@@ -10,8 +10,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class ShapeUtils {
 
     /**
-     * Default direction is UP
-     *
      * @return a new Rotated Block box VoxelShape
      */
     public static VoxelShape alignBox(VoxelShape shape, Direction oldDirection, Direction newDirection)
@@ -44,6 +42,7 @@ public class ShapeUtils {
         }
     }
 
+    @Deprecated
     //IntelliJ, listen, I know it's sussy, but I have to do it
     @SuppressWarnings("SuspiciousNameCombination")
     public static VoxelShape[] generateDirectionalVoxelShapes(Vec3 shapeStart, Vec3 shapeEnd)

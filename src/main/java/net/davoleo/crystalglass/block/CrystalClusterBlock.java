@@ -30,7 +30,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -72,8 +71,8 @@ public class CrystalClusterBlock extends CrystalBlock {
             //Increase the age right away so that voxel boxes are increased of 2 pixels instead of 1
             if (age == 3)
                 age++;
-            float horizCoord1 = 9F + age;
-            float horizCoord2 = 7F - age;
+            float horizCoord1 = 7F - age;
+            float horizCoord2 = 9F + age;
 
             //Reset the hacky change made before
             if (age > 3)
@@ -81,7 +80,11 @@ public class CrystalClusterBlock extends CrystalBlock {
 
             float height = 6 + (age > 1 ? age * age + 1 : 0);
 
-            shapes[age] = ShapeUtils.generateDirectionalVoxelShapes(new Vec3(horizCoord1, 0, horizCoord1), new Vec3(horizCoord2, height, horizCoord2));
+            VoxelShape shape = Block.box(horizCoord1, 0, horizCoord1, horizCoord2, height, horizCoord2);
+            for (int i = 0; i < Direction.values().length; i++)
+            {
+                shapes[age][i] = ShapeUtils.alignBox(shape, Direction.UP, Direction.values()[i]);
+            }
         }
 
         return shapes;
