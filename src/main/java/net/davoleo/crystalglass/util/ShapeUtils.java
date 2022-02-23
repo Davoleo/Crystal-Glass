@@ -23,18 +23,18 @@ public class ShapeUtils {
             if (oldDirection.getAxisDirection() != newDirection.getAxisDirection())
             {
                 AABB newBB = cloneAABB(bounds);
-                setAxisBoxValue(newBB, true, oldAxis, 1 - bounds.max(oldAxis));
-                setAxisBoxValue(newBB, false, oldAxis, 1 - bounds.min(oldAxis));
+                newBB = setAxisBoxValue(newBB, true, oldAxis, 1 - bounds.max(oldAxis));
+                newBB = setAxisBoxValue(newBB, false, oldAxis, 1 - bounds.min(oldAxis));
                 return Shapes.create(newBB);
             } else
-                return Block.box(bounds.minX, bounds.minY, bounds.minZ, bounds.maxX, bounds.maxY, bounds.maxZ);
+                return shape;
         } else
         {
             AABB newBB = cloneAABB(bounds);
-            setAxisBoxValue(newBB, true, newAxis, bounds.min(oldAxis));
-            setAxisBoxValue(newBB, false, newAxis, bounds.max(oldAxis));
-            setAxisBoxValue(newBB, true, oldAxis, bounds.min(newAxis));
-            setAxisBoxValue(newBB, false, oldAxis, bounds.max(newAxis));
+            newBB = setAxisBoxValue(newBB, true, newAxis, bounds.min(oldAxis));
+            newBB = setAxisBoxValue(newBB, false, newAxis, bounds.max(oldAxis));
+            newBB = setAxisBoxValue(newBB, true, oldAxis, bounds.min(newAxis));
+            newBB = setAxisBoxValue(newBB, false, oldAxis, bounds.max(newAxis));
             if (oldDirection.getAxisDirection() == newDirection.getAxisDirection())
                 return Shapes.create(newBB);
             else

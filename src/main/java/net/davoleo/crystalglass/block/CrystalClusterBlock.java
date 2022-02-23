@@ -111,11 +111,11 @@ public class CrystalClusterBlock extends CrystalBlock {
         VOXEL_SHAPES = generateVoxelShapes();
 
         if (face == AttachFace.FLOOR)
-            return VOXEL_SHAPES[age][5];
-        else if (face == AttachFace.CEILING)
-            return VOXEL_SHAPES[age][4];
-        else
-            return VOXEL_SHAPES[age][horizontalDirection.get2DDataValue()];
+            horizontalDirection = Direction.UP;
+        if (face == AttachFace.CEILING)
+            horizontalDirection = Direction.DOWN;
+
+        return VOXEL_SHAPES[age][horizontalDirection.get3DDataValue()];
     }
 
     @Override

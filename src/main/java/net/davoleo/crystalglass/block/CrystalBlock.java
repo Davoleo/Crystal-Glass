@@ -70,18 +70,11 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
         public VoxelShape getCrystalShape(Direction direction, AttachFace attachFace)
         {
             if (attachFace == AttachFace.CEILING)
-                return shapes[4];
-
+                direction = Direction.DOWN;
             if (attachFace == AttachFace.FLOOR)
-                return shapes[5];
+                direction = Direction.UP;
 
-            int horizIndex = direction.get2DDataValue();
-            if (horizIndex != -1)
-            {
-                return shapes[horizIndex];
-            }
-
-            return shapes[5];
+            return shapes[direction.get3DDataValue()];
         }
     }
 
