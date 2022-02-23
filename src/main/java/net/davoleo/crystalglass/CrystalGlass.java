@@ -38,6 +38,9 @@ public class CrystalGlass {
         //Called on the client side during mod setup
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
 
+        //Set Default Creative Tab
+        REGISTRATE.creativeModeTab(() -> CREATIVE_TAB);
+
         //Initializes the Blocks Registry
         new ModBlocks();
         //Initializes the Items Registry
