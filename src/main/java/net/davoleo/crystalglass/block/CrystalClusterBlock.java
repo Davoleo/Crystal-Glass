@@ -83,11 +83,7 @@ public class CrystalClusterBlock extends CrystalBlock {
 
             float height = 6 + (age > 1 ? age * age + 1 : 0);
 
-            VoxelShape shape = Block.box(horizCoord1, 0, horizCoord1, horizCoord2, height, horizCoord2);
-            for (int i = 0; i < Direction.values().length; i++)
-            {
-                shapes[age][i] = ShapeUtils.alignBox(shape, Direction.UP, Direction.values()[i]);
-            }
+            shapes[age] = ShapeUtils.generateDirectionalVoxelShapes(new Vec3(horizCoord1, 0, horizCoord1), new Vec3(horizCoord2, height, horizCoord2));
         }
 
         return shapes;
@@ -108,14 +104,12 @@ public class CrystalClusterBlock extends CrystalBlock {
         AttachFace face = state.getValue(FaceAttachedHorizontalDirectionalBlock.FACE);
         Direction horizontalDirection = state.getValue(HORIZONTAL_FACING);
 
-        VOXEL_SHAPES = generateVoxelShapes();
-
-        if (face == AttachFace.FLOOR)
-            horizontalDirection = Direction.UP;
         if (face == AttachFace.CEILING)
-            horizontalDirection = Direction.DOWN;
+            return VOXEL_SHAPES[age][4];
+        if (face == AttachFace.FLOOR)
+            return VOXEL_SHAPES[age][5];
 
-        return VOXEL_SHAPES[age][horizontalDirection.get3DDataValue()];
+        return VOXEL_SHAPES[age][horizontalDirection.get2DDataValue()];
     }
 
     @Override

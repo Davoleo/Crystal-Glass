@@ -48,15 +48,11 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
         MEDIUM(new Vec3(6.5, 0, 6.5), new Vec3(9.5, 12, 9.5)),
         LARGE(new Vec3(6, 0, 6), new Vec3(10, 16, 10));
 
-        private final VoxelShape[] shapes = new VoxelShape[Direction.values().length];
+        private final VoxelShape[] shapes;// = new VoxelShape[Direction.values().length];
 
         Size(Vec3 shapeStart, Vec3 shapeEnd)
         {
-            VoxelShape shape = Block.box(shapeStart.x, shapeStart.y, shapeStart.z, shapeEnd.x, shapeEnd.y, shapeEnd.z);
-            for (int i = 0; i < Direction.values().length; i++)
-            {
-                shapes[i] = ShapeUtils.alignBox(shape, Direction.UP, Direction.values()[i]);
-            }
+            shapes = ShapeUtils.generateDirectionalVoxelShapes(shapeStart, shapeEnd);
         }
 
         /**
@@ -70,11 +66,11 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
         public VoxelShape getCrystalShape(Direction direction, AttachFace attachFace)
         {
             if (attachFace == AttachFace.CEILING)
-                direction = Direction.DOWN;
+                return shapes[4];
             if (attachFace == AttachFace.FLOOR)
-                direction = Direction.UP;
+                return shapes[5];
 
-            return shapes[direction.get3DDataValue()];
+            return shapes[direction.get2DDataValue()];
         }
     }
 

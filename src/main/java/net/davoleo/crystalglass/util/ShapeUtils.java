@@ -12,6 +12,7 @@ public class ShapeUtils {
     /**
      * @return a new Rotated Block box VoxelShape
      */
+    @Deprecated
     public static VoxelShape alignBox(VoxelShape shape, Direction oldDirection, Direction newDirection)
     {
         Direction.Axis oldAxis = oldDirection.getAxis();
@@ -42,7 +43,6 @@ public class ShapeUtils {
         }
     }
 
-    @Deprecated
     //IntelliJ, listen, I know it's sussy, but I have to do it
     @SuppressWarnings("SuspiciousNameCombination")
     public static VoxelShape[] generateDirectionalVoxelShapes(Vec3 shapeStart, Vec3 shapeEnd)
