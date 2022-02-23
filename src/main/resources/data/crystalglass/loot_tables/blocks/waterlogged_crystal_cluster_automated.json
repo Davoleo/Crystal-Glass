@@ -1,9 +1,8 @@
 {
-  "credit": "Made by AlleCraft",
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
+      "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",

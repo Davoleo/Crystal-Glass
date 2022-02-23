@@ -13,6 +13,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -30,6 +31,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -119,7 +121,6 @@ public class CrystalClusterBlock extends CrystalBlock {
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player)
     {
-        //return new ItemStack(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get());
         return new ItemStack(ModItems.CRYSTAL_CLUSTERS.get(state.getValue(AGE)).get());
     }
 
@@ -148,7 +149,6 @@ public class CrystalClusterBlock extends CrystalBlock {
         {
             state = state.setValue(WATERLOGGED, true);
         }
-
 
         //Set the age state
         String itemName = context.getItemInHand().getItem().getRegistryName().getPath();
@@ -192,9 +192,13 @@ public class CrystalClusterBlock extends CrystalBlock {
                 ResourceLocation resourcelocation = new ResourceLocation("crystalglass:blocks/waterlogged_crystal_cluster_automated");
 
                 LootContext.Builder builder = new LootContext.Builder(world).withRandom(RANDOM);
-                LootContext lootcontext = builder.withParameter(LootContextParams.BLOCK_STATE, state).create(LootContextParamSets.BLOCK);
-                LootTable loottable = world.getServer().getLootTables().get(resourcelocation);
-                List<ItemStack> lootTableItems = loottable.getRandomItems(lootcontext);
+                LootContext lootContext = builder
+                        .withParameter(LootContextParams.BLOCK_STATE, state)
+                        .withParameter(LootContextParams.ORIGIN, new Vec3(pos.getX(), pos.getY(), pos.getZ()))
+                        .withParameter(LootContextParams.TOOL, new ItemStack(Items.IRON_PICKAXE))
+                        .create(LootContextParamSets.BLOCK);
+                LootTable lootTable = world.getServer().getLootTables().get(resourcelocation);
+                List<ItemStack> lootTableItems = lootTable.getRandomItems(lootContext);
 
                 for (ItemStack stack : lootTableItems)
                 {
