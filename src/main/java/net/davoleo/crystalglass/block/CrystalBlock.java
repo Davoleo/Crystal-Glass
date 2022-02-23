@@ -1,6 +1,6 @@
 package net.davoleo.crystalglass.block;
 
-import net.davoleo.crystalglass.init.ModItems;
+import net.davoleo.crystalglass.init.ModBlocks;
 import net.davoleo.crystalglass.util.ShapeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -131,7 +132,7 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
         if (size == null)
             return super.getCloneItemStack(state, target, world, pos, player);
 
-        return new ItemStack(ModItems.CRYSTALS.get(size.ordinal()).get());
+        return new ItemStack(ModBlocks.CRYSTAL_BLOCKS.get(size.ordinal()).get());
     }
 
     @Override
@@ -177,14 +178,14 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
         return true;
     }
 
-/*
+
     @ParametersAreNonnullByDefault
     @Nonnull
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos)
     {
-        //if (stateIn.getValue(WATERLOGGED))
-        //    world.scheduleTick(currentPos, Fluids.WATER.getSource(), Fluids.WATER.getTickDelay(world));
+        if (stateIn.getValue(WATERLOGGED))
+            world.scheduleTick(currentPos, Fluids.WATER.getSource(), Fluids.WATER.getTickDelay(world));
 
         /*
         BlockState newState = super.updateShape(stateIn, facing, facingState, world, currentPos, facingPos);
@@ -197,10 +198,9 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
             newState = newState.setValue(DOWN, facingState.getBlock() == stateIn.getBlock());
         }
         return newState;
-         *-/
+         */
         return super.updateShape(stateIn, facing, facingState, world, currentPos, facingPos);
     }
- */
 
 
 }

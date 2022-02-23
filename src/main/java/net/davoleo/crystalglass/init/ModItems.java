@@ -1,9 +1,7 @@
 package net.davoleo.crystalglass.init;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.davoleo.crystalglass.CrystalGlass;
-import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -22,18 +20,12 @@ public class ModItems {
     {
         CrystalClusterBlock.AGE.getPossibleValues().forEach(age ->
                 CRYSTAL_CLUSTERS.add(REGISTRATE
-                        .object("crystal_cluster_age_" + age)
-                        .simple(
-                                Item.class,
-                                NonNullSupplier.of(
-                                        () -> new BlockItem(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get(), DEFAULT_ITEM_PROPERTIES)
-                                )
-                        )
+                        .item("crystal_cluster_age_" + age, (props) -> new BlockItem(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get(), DEFAULT_ITEM_PROPERTIES))
+                        .defaultModel()
+                        .register()
                 )
         );
     }
-
-    public static final List<RegistryEntry<Item>> CRYSTALS = new ArrayList<>(CrystalBlock.Size.values().length);
 
     /*public static final Map<DyeColor, RegistryObject<Item>> CRYSTALS_BLOCK_ITEMS = new HashMap<>();
     static
