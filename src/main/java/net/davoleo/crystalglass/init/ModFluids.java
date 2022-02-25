@@ -1,10 +1,9 @@
 package net.davoleo.crystalglass.init;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import com.tterrag.registrate.util.entry.FluidEntry;
 import net.davoleo.crystalglass.CrystalGlass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 import static net.davoleo.crystalglass.CrystalGlass.REGISTRATE;
@@ -15,7 +14,7 @@ public class ModFluids {
     public static final ResourceLocation FLOWING_TEXTURE = new ResourceLocation(CrystalGlass.MODID, "fluid/molten_crystal_flowing");
     public static final ResourceLocation OVERLAY_TEXTURE = new ResourceLocation(CrystalGlass.MODID, "fluid/molten_crystal_overlay");
 
-    public static final RegistryEntry<ForgeFlowingFluid> MOLTEN_CRYSTAL_BUILDER = REGISTRATE
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_CRYSTAL_BUILDER = REGISTRATE
             .object("molten_crystal")
             .fluid(
                     "molten_crystal", STILL_TEXTURE, FLOWING_TEXTURE
@@ -31,9 +30,6 @@ public class ModFluids {
                     properties.slopeFindDistance(4)
                             .levelDecreasePerBlock(2)
             )
-            //.defaultSource()
-            //.defaultBlock()
-            //.defaultBucket()
-            .build().get(Fluid.class);
+            .register();
 
 }

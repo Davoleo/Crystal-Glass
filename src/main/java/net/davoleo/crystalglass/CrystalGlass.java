@@ -24,7 +24,7 @@ public class CrystalGlass {
         @Override
         public ItemStack makeIcon()
         {
-            return new ItemStack(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get());
+            return new ItemStack(ModItems.CRYSTAL_CLUSTERS.get(3).get());
         }
     };
 

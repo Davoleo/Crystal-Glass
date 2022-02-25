@@ -67,10 +67,11 @@ public class ShapeUtils {
                 case 4 -> shapes[face] = Block.box(shapeStart.x, 16 - shapeEnd.y, shapeStart.z, shapeEnd.x, 16 - shapeStart.y, shapeEnd.z);
             }
 
-            System.out.println(face + ": coords " + String.join(", ",
-                    Double.toString(shapes[face].min(Direction.Axis.X)), Double.toString(shapes[face].min(Direction.Axis.Y)), Double.toString(shapes[face].min(Direction.Axis.Z)),
-                    Double.toString(shapes[face].max(Direction.Axis.X)), Double.toString(shapes[face].max(Direction.Axis.Y)), Double.toString(shapes[face].max(Direction.Axis.Z))
-            ));
+            //Debug Print
+            //System.out.println(face + ": coords " + String.join(", ",
+            //        Double.toString(shapes[face].min(Direction.Axis.X)), Double.toString(shapes[face].min(Direction.Axis.Y)), Double.toString(shapes[face].min(Direction.Axis.Z)),
+            //        Double.toString(shapes[face].max(Direction.Axis.X)), Double.toString(shapes[face].max(Direction.Axis.Y)), Double.toString(shapes[face].max(Direction.Axis.Z))
+            //));
         }
 
         return shapes;
