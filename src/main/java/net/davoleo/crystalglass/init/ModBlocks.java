@@ -4,16 +4,12 @@ import com.google.common.collect.Lists;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
-import net.davoleo.crystalglass.block.FullCrystalBlock;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Material;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
 
 import static net.davoleo.crystalglass.CrystalGlass.REGISTRATE;
@@ -49,21 +45,18 @@ public class ModBlocks {
         }
     }
 
-    public static Map<DyeColor, RegistryEntry<FullCrystalBlock>> FULL_CRYSTAL_BLOCKS = new HashMap<>();
-    static
-    {
-        for (DyeColor color : DyeColor.values())
-        {
-            String name = "crystal_block_" + color.getSerializedName();
-            RegistryEntry<FullCrystalBlock> CRYSTALBLOCK_DYE = REGISTRATE.object(name).simple(Block.class, FullCrystalBlock::new);
-            FULL_CRYSTAL_BLOCKS.put(color, CRYSTALBLOCK_DYE);
-        }
+    //public static Map<DyeColor, RegistryEntry<FullCrystalBlock>> FULL_CRYSTAL_BLOCKS = new HashMap<>();
+    //static
+    //{
+    //    for (DyeColor color : DyeColor.values())
+    //    {
+    //        String name = "crystal_block_" + color.getSerializedName();
+    //        RegistryEntry<FullCrystalBlock> CRYSTALBLOCK_DYE = REGISTRATE.object(name).simple(Block.class, FullCrystalBlock::new);
+    //        FULL_CRYSTAL_BLOCKS.put(color, CRYSTALBLOCK_DYE);
+    //    }
+    //
+    //    RegistryEntry<FullCrystalBlock> CRYSTALBLOCK = REGISTRATE.object("crystal_block").simple(Block.class, FullCrystalBlock::new);
+    //    FULL_CRYSTAL_BLOCKS.put(null, CRYSTALBLOCK);
+    //}
 
-        RegistryEntry<FullCrystalBlock> CRYSTALBLOCK = REGISTRATE.object("crystal_block").simple(Block.class, FullCrystalBlock::new);
-        FULL_CRYSTAL_BLOCKS.put(null, CRYSTALBLOCK);
-    }
-
-    //public static final RegistryObject<FlowingFluidBlock> CRYSTAL_BLOCK = REGISTRATE.register("molten_crystal",
-    //        () -> new ForgeFluidBlock(() -> ModFluids.MOLTEN_CRYSTAL.get(), AbstractBlock.Properties.create(Material.LAVA)
-    //        .doesNotBlockMovement().hardnessAndResistance(100f).noDrop()));
 }

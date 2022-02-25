@@ -6,7 +6,6 @@ import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.davoleo.crystalglass.init.ModBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -49,12 +48,10 @@ public class BlockStateGenerator extends BlockStateProvider {
                     .build(), BlockStateProperties.WATERLOGGED);
         }
 
-        for (DyeColor color : ModBlocks.FULL_CRYSTAL_BLOCKS.keySet())
-        {
-            //Generate Full Crystal Block blockstate
-            simpleBlock(ModBlocks.FULL_CRYSTAL_BLOCKS.get(color).get(), models().getExistingFile(
-                    new ResourceLocation(CrystalGlass.MODID, "block/crystal_block_" + (color == null ? "" : "" + color.getSerializedName()))
-            ));
-        }
+        //for (DyeColor color : ModBlocks.FULL_CRYSTAL_BLOCKS.keySet())
+        //{
+        //    //Generate Full Crystal Block blockstate
+        //    simpleBlock(ModBlocks.FULL_CRYSTAL_BLOCKS.get(color).get());
+        //}
     }
 }
