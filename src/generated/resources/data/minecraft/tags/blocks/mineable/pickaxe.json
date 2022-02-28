@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "crystalglass:crystal_cluster",
+    "crystalglass:small_crystal",
+    "crystalglass:medium_crystal",
+    "crystalglass:large_crystal"
+  ]
+}

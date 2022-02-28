@@ -2,6 +2,7 @@ package net.davoleo.crystalglass.init;
 
 import com.google.common.collect.Lists;
 import com.tterrag.registrate.util.entry.RegistryEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.davoleo.crystalglass.block.CrystalBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.minecraft.tags.BlockTags;
@@ -26,6 +27,7 @@ public class ModBlocks {
     public static final RegistryEntry<CrystalClusterBlock> CRYSTAL_CLUSTER_BLOCK =
             REGISTRATE.object("crystal_cluster")
                     .block(Material.AMETHYST, properties -> new CrystalClusterBlock())
+                    .loot(NonNullBiConsumer.noop())
                     .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                     .register();
 
@@ -38,6 +40,7 @@ public class ModBlocks {
             CRYSTAL_BLOCKS.add(
                     REGISTRATE.object(blockPair.getLeft())
                             .block(Block.class, props -> blockPair.getRight().get())
+                            .loot(NonNullBiConsumer.noop())
                             .simpleItem()
                             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                             .register()
