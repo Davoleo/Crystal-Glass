@@ -2,6 +2,7 @@ package net.davoleo.crystalglass.block;
 
 import net.davoleo.crystalglass.init.ModBlocks;
 import net.davoleo.crystalglass.util.ShapeUtils;
+import net.davoleo.crystalglass.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -85,7 +86,7 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
 
     private CrystalBlock(Size size)
     {
-        super(FullCrystalBlock.PROPERTIES
+        super(Utils.DEFAULT_ROCK_PROPERTIES
                 .emissiveRendering((p1, p2, p3) -> true)
                 .lightLevel(size::getLightLevel)
         );
@@ -97,7 +98,7 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
      */
     protected CrystalBlock(ToIntFunction<BlockState> stateLightFunction)
     {
-        super(FullCrystalBlock.PROPERTIES
+        super(Utils.DEFAULT_ROCK_PROPERTIES
                 .emissiveRendering((p1, p2, p3) -> true)
                 .lightLevel(stateLightFunction)
         );

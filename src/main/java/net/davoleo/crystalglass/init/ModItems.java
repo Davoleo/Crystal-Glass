@@ -24,17 +24,4 @@ public class ModItems {
         }
     }
 
-    /*public static final Map<DyeColor, RegistryObject<Item>> CRYSTALS_BLOCK_ITEMS = new HashMap<>();
-    static
-    {
-        for (CrystalBlock.Size size : CrystalBlock.Size.values())
-            CRYSTALS.add(registerFromBlock(ModBlocks.CRYSTAL_BLOCKS.get(size.ordinal())));
-        for (DyeColor color : ModBlocks.FULL_CRYSTAL_BLOCKS.keySet())
-        {
-            RegistryObject<Item> CRYSTAL_ITEMBLOCK = registerFromBlock(ModBlocks.FULL_CRYSTAL_BLOCKS.get(color));
-            CRYSTALS_BLOCK_ITEMS.put(color, CRYSTAL_ITEMBLOCK);
-        }
-
-    }*/
-
 }
