@@ -4,6 +4,7 @@ import com.tterrag.registrate.util.entry.FluidEntry;
 import net.davoleo.crystalglass.CrystalGlass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 import static net.davoleo.crystalglass.CrystalGlass.REGISTRATE;
@@ -25,11 +26,14 @@ public class ModFluids {
                     .viscosity(5)
                     .sound(SoundEvents.AMETHYST_BLOCK_CHIME)
                     .overlay(OVERLAY_TEXTURE)
+                    .temperature(1000)
+                    .sound(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA)
             )
             .properties(properties ->
                     properties.slopeFindDistance(4)
                             .levelDecreasePerBlock(2)
             )
+            .tag(FluidTags.LAVA)
             .source(ForgeFlowingFluid.Source::new)
             .bucket()
             .model((context, provider) -> provider.generated(() -> ModFluids.MOLTEN_CRYSTAL.get().getBucket()))
