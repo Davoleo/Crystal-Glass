@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "crystalglass:medium_crystal_shard"
+    },
+    {
+      "item": "crystalglass:medium_crystal_shard"
+    },
+    {
+      "item": "crystalglass:medium_crystal_shard"
+    },
+    {
+      "item": "crystalglass:medium_crystal_shard"
+    },
+    {
+      "item": "crystalglass:medium_crystal_shard"
+    },
+    {
+      "item": "crystalglass:medium_crystal_shard"
+    }
+  ],
+  "result": {
+    "item": "crystalglass:large_crystal_shard",
+    "count": 3
+  }
+}

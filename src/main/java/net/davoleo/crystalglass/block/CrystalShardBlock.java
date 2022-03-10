@@ -1,8 +1,8 @@
 package net.davoleo.crystalglass.block;
 
 import net.davoleo.crystalglass.init.ModBlocks;
+import net.davoleo.crystalglass.util.DefaultProperties;
 import net.davoleo.crystalglass.util.ShapeUtils;
-import net.davoleo.crystalglass.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -38,7 +38,7 @@ import java.util.function.ToIntFunction;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
-public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock implements SimpleWaterloggedBlock {
+public class CrystalShardBlock extends FaceAttachedHorizontalDirectionalBlock implements SimpleWaterloggedBlock {
 
     protected static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     protected static final BooleanProperty UP = BlockStateProperties.UP;
@@ -78,15 +78,15 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
     @Nullable
     private final Size size;
 
-    public static Pair<String, Supplier<CrystalBlock>> create(Size size)
+    public static Pair<String, Supplier<CrystalShardBlock>> create(Size size)
     {
-        String blockName = size.name().toLowerCase() + "_crystal";
-        return Pair.of(blockName, () -> new CrystalBlock(size));
+        String blockName = size.name().toLowerCase() + "_crystal_shard";
+        return Pair.of(blockName, () -> new CrystalShardBlock(size));
     }
 
-    private CrystalBlock(Size size)
+    private CrystalShardBlock(Size size)
     {
-        super(Utils.DEFAULT_ROCK_PROPERTIES
+        super(DefaultProperties.CRYSTAL_BLOCK
                 .emissiveRendering((p1, p2, p3) -> true)
                 .lightLevel(size::getLightLevel)
         );
@@ -96,9 +96,9 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
     /**
      * this only exists to be called by subclasses
      */
-    protected CrystalBlock(ToIntFunction<BlockState> stateLightFunction)
+    protected CrystalShardBlock(ToIntFunction<BlockState> stateLightFunction)
     {
-        super(Utils.DEFAULT_ROCK_PROPERTIES
+        super(DefaultProperties.CRYSTAL_BLOCK
                 .emissiveRendering((p1, p2, p3) -> true)
                 .lightLevel(stateLightFunction)
         );
@@ -122,7 +122,7 @@ public class CrystalBlock extends FaceAttachedHorizontalDirectionalBlock impleme
         if (size == null)
             return super.getCloneItemStack(state, target, world, pos, player);
 
-        return new ItemStack(ModBlocks.CRYSTAL_BLOCKS.get(size.ordinal()).get());
+        return new ItemStack(ModBlocks.CRYSTAL_SHARDS.get(size.ordinal()).get());
     }
 
     @Override

@@ -20,7 +20,7 @@
     {
       "chance": 0.75,
       "output": {
-        "item": "crystalglass:large_crystal"
+        "item": "crystalglass:large_crystal_shard"
       },
       "minRolls": 1,
       "maxRolls": 2

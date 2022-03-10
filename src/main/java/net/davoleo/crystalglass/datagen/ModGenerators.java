@@ -1,6 +1,6 @@
 package net.davoleo.crystalglass.datagen;
 
-import net.davoleo.crystalglass.CrystalGlass;
+import net.davoleo.crystalglass.CrystalGlassMod;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -10,7 +10,7 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 /**
  * They Allow us to generate many assets automatically without having to type JSON files by hand
  */
-@Mod.EventBusSubscriber(modid = CrystalGlass.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = CrystalGlassMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModGenerators {
 
     @SubscribeEvent

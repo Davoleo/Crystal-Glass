@@ -1,7 +1,9 @@
 package net.davoleo.crystalglass;
 
 import com.tterrag.registrate.Registrate;
-import net.davoleo.crystalglass.init.*;
+import net.davoleo.crystalglass.init.ClientSetup;
+import net.davoleo.crystalglass.init.ModItems;
+import net.davoleo.crystalglass.init.ModRegistry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
@@ -12,8 +14,8 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 
-@Mod(CrystalGlass.MODID)
-public class CrystalGlass {
+@Mod(CrystalGlassMod.MODID)
+public class CrystalGlassMod {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static final String MODID = "crystalglass";
@@ -30,25 +32,15 @@ public class CrystalGlass {
 
     public static final Registrate REGISTRATE = Registrate.create(MODID);
 
-    @SuppressWarnings("InstantiationOfUtilityClass")
-    public CrystalGlass()
+    public CrystalGlassMod()
     {
         //Called on both sides during mod setup
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         //Called on the client side during mod setup
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
 
-        //Set Default Creative Tab
-        REGISTRATE.creativeModeTab(() -> CREATIVE_TAB);
-
-        //Initializes the Blocks Registry
-        new ModBlocks();
-        //Initializes the Items Registry
-        new ModItems();
-        //Initializes the Fluids Registry
-        new ModFluids();
-        //Initializes the Sounds Registry
-        ModSounds.init();
+        //Initialize Mod Registries
+        ModRegistry.init();
     }
 
     private void setup(final FMLCommonSetupEvent event)

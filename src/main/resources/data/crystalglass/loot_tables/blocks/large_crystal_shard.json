@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "crystalglass:small_crystal"
+          "name": "crystalglass:large_crystal_shard"
         }
       ],
       "conditions": [

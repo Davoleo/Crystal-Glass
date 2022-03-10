@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "crystalglass:large_crystal"
+      "item": "crystalglass:large_crystal_shard"
     },
     {
-      "item": "crystalglass:large_crystal"
+      "item": "crystalglass:large_crystal_shard"
     },
     {
-      "item": "crystalglass:large_crystal"
+      "item": "crystalglass:large_crystal_shard"
     },
     {
-      "item": "crystalglass:large_crystal"
+      "item": "crystalglass:large_crystal_shard"
     }
   ],
   "result": {

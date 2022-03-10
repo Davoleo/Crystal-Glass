@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "crystalglass:medium_crystal"
+      "item": "crystalglass:medium_crystal_shard"
     }
   ],
   "result": {
-    "item": "crystalglass:small_crystal",
+    "item": "crystalglass:small_crystal_shard",
     "count": 2
   }
 }

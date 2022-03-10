@@ -50,7 +50,7 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
  * 2. An age depending on the stage of growth of the crystal<br>
  * 3. A waterlogged boolean property to describe whether the block is waterlogged or not<br>
  */
-public class CrystalClusterBlock extends CrystalBlock {
+public class CrystalClusterBlock extends CrystalShardBlock {
 
     private VoxelShape[][] VOXEL_SHAPES;
 

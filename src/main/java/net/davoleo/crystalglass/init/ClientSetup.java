@@ -8,9 +8,9 @@ public class ClientSetup {
     public static void init(final FMLClientSetupEvent event)
     {
         //Translucent Blocks
-        ModBlocks.CRYSTAL_BLOCKS.forEach(crystal -> ItemBlockRenderTypes.setRenderLayer(crystal.get(), RenderType.translucent()));
+        ModBlocks.CRYSTAL_SHARDS.forEach(crystal -> ItemBlockRenderTypes.setRenderLayer(crystal.get(), RenderType.translucent()));
 
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CRYSTAL_CLUSTER_BLOCK.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.CRYSTAL_CLUSTER.get(), RenderType.translucent());
         //for (RegistryEntry<FullCrystalBlock> block : ModBlocks.FULL_CRYSTAL_BLOCKS.values())
         //{
         //    ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.translucent());
