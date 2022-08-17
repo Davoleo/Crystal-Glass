@@ -47,7 +47,7 @@ minecraft {
     // stable     #          Stables are built at the discretion of the MCP team.
     // official   MCVersion  Official field/method names from Mojang mapping files
     //mappings channel: 'official', version: '1.16.5'
-    mappings channel: 'parchment', version: '2021.12.19-1.18.1'
+    mappings channel: 'parchment', version: '2022.08.07-1.18.2'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -131,9 +131,9 @@ repositories {
 
 dependencies {
 
-    minecraft "net.minecraftforge:forge:$minecraft_version-39.1.2"
+    minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
 
-    def registrate = "com.tterrag.registrate:Registrate:MC1.18-1.0.21"
+    def registrate = "com.tterrag.registrate:Registrate:MC$minecraft_version-$registrate_version"
     implementation(fg.deobf(registrate))
     shade(registrate)
 
