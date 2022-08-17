@@ -3,6 +3,9 @@ package net.davoleo.crystalglass.init;
 import com.google.common.collect.Lists;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.davoleo.crystalglass.block.CrystalShardBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -16,6 +19,10 @@ import java.util.function.Supplier;
  * It also initializes registry names automatically without needing to set them anywhere else in the mod
  */
 public final class ModBlocks extends ModRegistry {
+
+    public static void init()
+    {
+    }
 
     //Registers the Crystal Cluster Block and its related BlockItem
     public static final RegistryObject<CrystalClusterBlock> CRYSTAL_CLUSTER = BLOCKS.register("crystal_cluster", CrystalClusterBlock::new);
@@ -42,6 +49,12 @@ public final class ModBlocks extends ModRegistry {
             ));
         }
     }
+
+    public static final RegistryObject<LiquidBlock> MOLTEN_CRYSTAL_BLOCK =
+            BLOCKS.register(
+                    "molten_crystal",
+                    () -> new LiquidBlock(() -> ModFluids.MOLTEN_CRYSTAL.get(), BlockBehaviour.Properties.copy(Blocks.LAVA))
+            );
 
     /*
     public static Map<DyeColor, RegistryEntry<Block>> CRYSTAL_GLASS_BLOCKS = new HashMap<>();

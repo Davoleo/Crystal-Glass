@@ -3,5 +3,6 @@
   "block.crystalglass.crystal_cluster": "Crystal Cluster",
   "block.crystalglass.large_crystal": "Large Crystal",
   "block.crystalglass.medium_crystal": "Medium Crystal",
-  "block.crystalglass.small_crystal": "Small Crystal"
+  "block.crystalglass.small_crystal": "Small Crystal",
+  "item.crystalglass.molten_crystal_bucket": "Molten Crystal Bucket"
 }

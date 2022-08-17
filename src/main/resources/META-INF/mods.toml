@@ -1,6 +1,6 @@
 modLoader = "javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion = "[39,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+loaderVersion = "[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 license = "MIT"
 # A URL to refer people to when problems occur with this mod
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
@@ -28,12 +28,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
 [[dependencies.crystalglass]] #optional
 modId = "forge" #mandatory
 mandatory = true #mandatory
-versionRange = "[39,)" #mandatory
+versionRange = "[40,)" #mandatory
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.crystalglass]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.18.1,1.18.2)"
+versionRange = "[1.18.2,)"
 ordering = "NONE"
 side = "BOTH"

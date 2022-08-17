@@ -21,26 +21,14 @@ public sealed class ModRegistry permits ModBlocks, ModFluids, ModItems {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         FLUIDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        forceInitRegistry(ModBlocks.class);
-        forceInitRegistry(ModItems.class);
-        forceInitRegistry(ModFluids.class);
+        ModBlocks.init();
+        ModItems.init();
+        ModFluids.init();
     }
 
     public static ResourceLocation resourceLoc(String name)
     {
         return new ResourceLocation(CrystalGlassMod.MODID, name);
-    }
-
-    private static void forceInitRegistry(Class<? extends ModRegistry> registryClass)
-    {
-        try
-        {
-            Class.forName(registryClass.getName(), true, registryClass.getClassLoader());
-        }
-        catch (ClassNotFoundException e)
-        {
-            throw new AssertionError(e);
-        }
     }
 
 }

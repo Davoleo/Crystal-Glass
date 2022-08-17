@@ -16,8 +16,9 @@ public class ClientSetup {
         //    ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.translucent());
         //}
 
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.MOLTEN_CRYSTAL_BLOCK.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.MOLTEN_CRYSTAL.get(), RenderType.translucent());
-        //ItemBlockRenderTypes.setRenderLayer(ModFluids.MOLTEN_CRYSTAL_FLOW.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.MOLTEN_CRYSTAL_FLOWING.get(), RenderType.translucent());
     }
 
 

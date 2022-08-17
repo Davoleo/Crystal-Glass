@@ -3,5 +3,6 @@
   "block.crystalglass.crystal_cluster": "Ammasso di Cristallo",
   "block.crystalglass.large_crystal": "Cristallo Grande",
   "block.crystalglass.medium_crystal": "Cristallo Medio",
-  "block.crystalglass.small_crystal": "Cristallo Piccolo"
+  "block.crystalglass.small_crystal": "Cristallo Piccolo",
+  "item.crystalglass.molten_crystal_bucket": "Secchio di Cristallo Sciolto"
 }
