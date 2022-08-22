@@ -4,6 +4,7 @@ import net.davoleo.crystalglass.init.ModItems;
 import net.davoleo.crystalglass.util.ShapeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -12,6 +13,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -202,6 +204,14 @@ public class CrystalClusterBlock extends CrystalShardBlock {
 
             world.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 4F, 1.5F + world.random.nextFloat() * 0.4F);
         }
+    }
+
+    @Override
+    public void fillItemCategory(@Nonnull CreativeModeTab pTab, @Nonnull NonNullList<ItemStack> pItems)
+    {
+        AGE.getPossibleValues().forEach(age ->
+                pItems.add(new ItemStack(ModItems.CRYSTAL_CLUSTERS.get(age).get()))
+        );
     }
 
     /**
