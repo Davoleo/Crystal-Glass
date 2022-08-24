@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "crystalglass:crystal_full_block",
+    "crystalglass:white_crystal_full_block",
+    "crystalglass:orange_crystal_full_block",
+    "crystalglass:magenta_crystal_full_block",
+    "crystalglass:light_blue_crystal_full_block",
+    "crystalglass:yellow_crystal_full_block",
+    "crystalglass:lime_crystal_full_block",
+    "crystalglass:pink_crystal_full_block",
+    "crystalglass:gray_crystal_full_block",
+    "crystalglass:light_gray_crystal_full_block",
+    "crystalglass:cyan_crystal_full_block",
+    "crystalglass:purple_crystal_full_block",
+    "crystalglass:blue_crystal_full_block",
+    "crystalglass:brown_crystal_full_block",
+    "crystalglass:green_crystal_full_block",
+    "crystalglass:red_crystal_full_block",
+    "crystalglass:black_crystal_full_block"
+  ]
+}

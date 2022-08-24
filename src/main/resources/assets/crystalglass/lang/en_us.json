@@ -1,8 +1,9 @@
 {
   "itemGroup.crystalglass": "Crystal Glass",
   "block.crystalglass.crystal_cluster": "Crystal Cluster",
-  "block.crystalglass.large_crystal": "Large Crystal",
-  "block.crystalglass.medium_crystal": "Medium Crystal",
-  "block.crystalglass.small_crystal": "Small Crystal",
-  "item.crystalglass.molten_crystal_bucket": "Molten Crystal Bucket"
+  "block.crystalglass.large_crystal_shard": "Large Crystal Shard",
+  "block.crystalglass.medium_crystal_shard": "Medium Crystal Shard",
+  "block.crystalglass.small_crystal_shard": "Small Crystal Shard",
+  "item.crystalglass.molten_crystal_bucket": "Molten Crystal Bucket",
+  "block.crystalglass.crystal_full_block": "Crystal Block"
 }

@@ -1,8 +1,9 @@
 {
   "itemGroup.crystalglass": "Vetro di Cristallo",
   "block.crystalglass.crystal_cluster": "Ammasso di Cristallo",
-  "block.crystalglass.large_crystal": "Cristallo Grande",
-  "block.crystalglass.medium_crystal": "Cristallo Medio",
-  "block.crystalglass.small_crystal": "Cristallo Piccolo",
-  "item.crystalglass.molten_crystal_bucket": "Secchio di Cristallo Sciolto"
+  "block.crystalglass.large_crystal_shard": "Cristallo Grande",
+  "block.crystalglass.medium_crystal_shard": "Cristallo Medio",
+  "block.crystalglass.small_crystal_shard": "Cristallo Piccolo",
+  "item.crystalglass.molten_crystal_bucket": "Secchio di Cristallo Sciolto",
+  "block.crystalglass.crystal_full_block": "Blocco di Cristallo"
 }

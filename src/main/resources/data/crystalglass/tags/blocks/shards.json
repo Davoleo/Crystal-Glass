@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "crystalglass:large_crystal",
-    "crystalglass:medium_crystal",
-    "crystalglass:small_crystal"
+    "crystalglass:large_crystal_shard",
+    "crystalglass:medium_crystal_shard",
+    "crystalglass:small_crystal_shard"
   ]
 }

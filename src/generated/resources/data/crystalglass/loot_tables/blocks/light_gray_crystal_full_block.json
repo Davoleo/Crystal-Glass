@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "crystalglass:crystal_block"
+          "name": "crystalglass:light_gray_crystal_full_block"
         }
       ],
       "conditions": [

@@ -7,6 +7,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public final class ModItems extends ModRegistry {
 
     public static void init()
     {
+        ModBlocks.CRYSTAL_SHARDS.forEach(ModItems::registerBlockItem);
     }
 
     public static final List<RegistryObject<BlockItem>> CRYSTAL_CLUSTERS = Util.make(
@@ -35,4 +37,9 @@ public final class ModItems extends ModRegistry {
                             .stacksTo(1)
                     )
             );
+
+    public static void registerBlockItem(RegistryObject<? extends Block> block)
+    {
+        ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), DefaultProperties.ITEM));
+    }
 }

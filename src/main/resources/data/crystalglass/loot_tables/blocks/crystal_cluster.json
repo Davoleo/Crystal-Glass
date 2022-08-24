@@ -18,7 +18,7 @@
               "add": false
             }
           ],
-          "name": "crystalglass:large_crystal"
+          "name": "crystalglass:large_crystal_shard"
         }
       ],
       "conditions": [
@@ -65,7 +65,7 @@
               "add": false
             }
           ],
-          "name": "crystalglass:medium_crystal"
+          "name": "crystalglass:medium_crystal_shard"
         }
       ],
       "conditions": [
@@ -112,7 +112,7 @@
               "add": false
             }
           ],
-          "name": "crystalglass:small_crystal"
+          "name": "crystalglass:small_crystal_shard"
         }
       ],
       "conditions": [

@@ -2,6 +2,6 @@
   "credit": "Made by AlleCraft",
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "crystalglass:item/large_crystal"
+    "layer0": "crystalglass:item/medium_crystal_shard"
   }
 }
