@@ -13,7 +13,9 @@ public class DefaultProperties {
     public static final Block.Properties CRYSTAL_BLOCK =
             Block.Properties.of(Material.AMETHYST)
                     .requiresCorrectToolForDrops()
-                    .strength(0.8F, 9);
+                    .strength(0.8F, 9)
+                    .noOcclusion()
+                    .isViewBlocking((pState, pLevel, pPos) -> false);
 
     public static final Block.Properties GLASS_BLOCK =
             Block.Properties.of(Material.GLASS)

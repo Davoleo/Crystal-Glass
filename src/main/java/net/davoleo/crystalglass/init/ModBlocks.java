@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -61,7 +60,7 @@ public final class ModBlocks extends ModRegistry {
     //Decorative FullBlock: Crystal Block
     public static final RegistryEntry<Block> BASE_CRYSTAL_BLOCK = CrystalGlassMod.REGISTRATE
             .object("crystal_full_block")
-            .block(Material.AMETHYST, Block::new)
+            .block(properties -> new Block(DefaultProperties.CRYSTAL_BLOCK))
             .blockstate((gencontext, registrateProvider) -> registrateProvider.simpleBlock(gencontext.getEntry()))
             .simpleItem()
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
