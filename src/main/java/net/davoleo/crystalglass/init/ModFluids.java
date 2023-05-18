@@ -3,9 +3,13 @@ package net.davoleo.crystalglass.init;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraftforge.common.SoundActions;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Consumer;
 
 public final class ModFluids extends ModRegistry {
 
@@ -23,20 +27,47 @@ public final class ModFluids extends ModRegistry {
     public static final RegistryObject<FlowingFluid> MOLTEN_CRYSTAL_FLOWING = FLUIDS.register("molten_crystal_flowing",
             () -> new ForgeFlowingFluid.Flowing(ModFluids.MOLTEN_CRYSTAL_PROPS));
 
+
+    public static final FluidType MOLTEN_CRYSTAL_FLUIDTYPE = new FluidType(FluidType.Properties.create()
+            .density(15)
+            .lightLevel(2)
+            .viscosity(5)
+            .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.AMETHYST_BLOCK_CHIME)
+            .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
+            .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
+            .temperature(1000)) {
+        @Override
+        public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+            consumer.accept(new IClientFluidTypeExtensions() {
+                @Override
+                public ResourceLocation getStillTexture() {
+                    return STILL_TEXTURE;
+                }
+
+                @Override
+                public ResourceLocation getFlowingTexture() {
+                    return FLOWING_TEXTURE;
+                }
+
+                @Override
+                public ResourceLocation getOverlayTexture() {
+                    return OVERLAY_TEXTURE;
+                }
+
+                @Override
+                public int getTintColor() {
+                    return 0xBFFFFFFF;
+                }
+            });
+        }
+    };
+
+
     public static final ForgeFlowingFluid.Properties MOLTEN_CRYSTAL_PROPS = new ForgeFlowingFluid.Properties(
-            MOLTEN_CRYSTAL, MOLTEN_CRYSTAL_FLOWING,
-            FluidAttributes.builder(STILL_TEXTURE, FLOWING_TEXTURE)
-                    .density(15)
-                    .luminosity(2)
-                    .viscosity(5)
-                    .sound(SoundEvents.AMETHYST_BLOCK_CHIME)
-                    .overlay(OVERLAY_TEXTURE)
-                    .color(0xBFFFFFFF)
-                    .temperature(1000)
-                    .sound(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA)
+            () -> MOLTEN_CRYSTAL_FLUIDTYPE,
+            MOLTEN_CRYSTAL, MOLTEN_CRYSTAL_FLOWING
     ).slopeFindDistance(4).levelDecreasePerBlock(2)
             .block(ModBlocks.MOLTEN_CRYSTAL_BLOCK)
             .bucket(ModItems.MOLTEN_CRYSTAL_BUCKET);
-
 
 }

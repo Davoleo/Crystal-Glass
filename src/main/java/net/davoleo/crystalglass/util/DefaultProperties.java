@@ -1,8 +1,6 @@
 package net.davoleo.crystalglass.util;
 
-import net.davoleo.crystalglass.CrystalGlassMod;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -31,8 +29,4 @@ public class DefaultProperties {
     {
         return BlockBehaviour.Properties.of(material, color);
     }
-
-    public static final Item.Properties ITEM =
-            new Item.Properties()
-                    .tab(CrystalGlassMod.CREATIVE_TAB);
 }

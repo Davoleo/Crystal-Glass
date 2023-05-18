@@ -4,7 +4,7 @@ import net.davoleo.crystalglass.CrystalGlassMod;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.davoleo.crystalglass.block.CrystalShardBlock;
 import net.davoleo.crystalglass.init.ModBlocks;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -14,9 +14,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class BlockStateGenerator extends BlockStateProvider {
 
-    public BlockStateGenerator(DataGenerator gen, ExistingFileHelper exFileHelper)
-    {
-        super(gen, CrystalGlassMod.MODID, exFileHelper);
+    public BlockStateGenerator(PackOutput output, ExistingFileHelper exFileHelper) {
+        super(output, CrystalGlassMod.MODID, exFileHelper);
     }
 
     @Override

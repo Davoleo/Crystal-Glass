@@ -4,16 +4,15 @@ import net.davoleo.crystalglass.init.ModItems;
 import net.davoleo.crystalglass.util.ShapeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -41,7 +40,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.Random;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
@@ -147,7 +145,7 @@ public class CrystalClusterBlock extends CrystalShardBlock {
         }
 
         //Set the age state
-        String itemName = context.getItemInHand().getItem().getRegistryName().getPath();
+        String itemName = context.getItemInHand().getItem().getDescriptionId();
         char age = itemName.charAt(itemName.length() - 1);
         state = state.setValue(AGE, Character.getNumericValue(age));
 
@@ -166,19 +164,15 @@ public class CrystalClusterBlock extends CrystalShardBlock {
         return InteractionResult.sidedSuccess(world.isClientSide);
     }
 
-    @Deprecated
     @Override
-    public void randomTick(BlockState state, @Nonnull ServerLevel world, @Nonnull BlockPos pos, @Nonnull Random random)
-    {
+    public void randomTick(BlockState state, @Nonnull ServerLevel world, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         int age = state.getValue(AGE);
         boolean waterlogged = state.getValue(WATERLOGGED);
-        if (age < 3)
-        {
+        if (age < 3) {
             //Prev 30 and 15
             if (random.nextInt(waterlogged ? 2 : 4) == 0)
                 world.setBlock(pos, state.setValue(AGE, age + 1), 2);
-        } else
-        {
+        } else {
             if (waterlogged)
             {
                 world.setBlock(pos, state.setValue(AGE, age - random.nextInt(3)), 3);
@@ -187,7 +181,7 @@ public class CrystalClusterBlock extends CrystalShardBlock {
             {
                 ResourceLocation resourcelocation = new ResourceLocation("crystalglass:blocks/waterlogged_crystal_cluster_automated");
 
-                LootContext.Builder builder = new LootContext.Builder(world).withRandom(RANDOM);
+                LootContext.Builder builder = new LootContext.Builder(world).withRandom(random);
                 LootContext lootContext = builder
                         .withParameter(LootContextParams.BLOCK_STATE, state)
                         .withParameter(LootContextParams.ORIGIN, new Vec3(pos.getX(), pos.getY(), pos.getZ()))
@@ -204,14 +198,6 @@ public class CrystalClusterBlock extends CrystalShardBlock {
 
             world.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 4F, 1.5F + world.random.nextFloat() * 0.4F);
         }
-    }
-
-    @Override
-    public void fillItemCategory(@Nonnull CreativeModeTab pTab, @Nonnull NonNullList<ItemStack> pItems)
-    {
-        AGE.getPossibleValues().forEach(age ->
-                pItems.add(new ItemStack(ModItems.CRYSTAL_CLUSTERS.get(age).get()))
-        );
     }
 
     /**

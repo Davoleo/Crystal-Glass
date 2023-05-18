@@ -1,7 +1,6 @@
 package net.davoleo.crystalglass.init;
 
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
-import net.davoleo.crystalglass.util.DefaultProperties;
 import net.minecraft.Util;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
@@ -24,15 +23,14 @@ public final class ModItems extends ModRegistry {
             new ArrayList<>(CrystalClusterBlock.AGE.getPossibleValues().size()), clusters ->
                     CrystalClusterBlock.AGE.getPossibleValues().forEach(age ->
                             clusters.add(ITEMS.register("crystal_cluster_age_" + age,
-                                    () -> new BlockItem(ModBlocks.CRYSTAL_CLUSTER.get(),
-                                            age == 0 ? DefaultProperties.ITEM : new Item.Properties())
+                                    () -> new BlockItem(ModBlocks.CRYSTAL_CLUSTER.get(), new Item.Properties())
                             )))
     );
 
     public static final RegistryObject<BucketItem> MOLTEN_CRYSTAL_BUCKET =
             ITEMS.register(
                     "molten_crystal_bucket",
-                    () -> new BucketItem(ModFluids.MOLTEN_CRYSTAL, DefaultProperties.ITEM
+                    () -> new BucketItem(ModFluids.MOLTEN_CRYSTAL, new Item.Properties()
                             .craftRemainder(Items.BUCKET)
                             .stacksTo(1)
                     )
@@ -40,6 +38,6 @@ public final class ModItems extends ModRegistry {
 
     public static void registerBlockItem(RegistryObject<? extends Block> block)
     {
-        ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), DefaultProperties.ITEM));
+        ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
     }
 }
