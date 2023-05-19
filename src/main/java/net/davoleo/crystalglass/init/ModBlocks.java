@@ -58,23 +58,21 @@ public final class ModBlocks extends ModRegistry {
             );
 
     //Decorative FullBlock: Crystal Block
-    public static final RegistryEntry<Block> BASE_CRYSTAL_BLOCK = CrystalGlassMod.REGISTRATE
-            .object("crystal_full_block")
-            .block(properties -> new Block(DefaultProperties.CRYSTAL_BLOCK))
-            .blockstate((gencontext, registrateProvider) -> registrateProvider.simpleBlock(gencontext.getEntry()))
-            .simpleItem()
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .register();
+//    public static final RegistryEntry<Block> BASE_CRYSTAL_BLOCK = CrystalGlassMod.REGISTRATE
+//            .object("crystal_full_block")
+//            .block(properties -> new Block(DefaultProperties.CRYSTAL_BLOCK))
+//            .blockstate((gencontext, registrateProvider) -> registrateProvider.simpleBlock(gencontext.getEntry()))
+//            .simpleItem()
+//            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+//            .register();
 
-    public static final Map<DyeColor, RegistryEntry<Block>> COLORED_CRYSTAL_BLOCKS = registerColoredBlocks("full", properties -> properties);
+    //public static final Map<DyeColor, RegistryEntry<Block>> COLORED_CRYSTAL_BLOCKS = registerColoredBlocks("full", properties -> properties);
 
 
-    private static Map<DyeColor, RegistryEntry<Block>> registerColoredBlocks(String blockType, UnaryOperator<BlockBehaviour.Properties> transformer)
-    {
+    private static Map<DyeColor, RegistryEntry<Block>> registerColoredBlocks(String blockType, UnaryOperator<BlockBehaviour.Properties> transformer) {
         EnumMap<DyeColor, RegistryEntry<Block>> coloredBlocks = new EnumMap<>(DyeColor.class);
 
-        for (DyeColor color : DyeColor.values())
-        {
+        for (DyeColor color : DyeColor.values()) {
             RegistryEntry<Block> crystalBlock = CrystalGlassMod.REGISTRATE
                     .object(color.getSerializedName() + "_crystal_" + blockType + "_block")
                     .block((properties) -> new Block(transformer.apply(DefaultProperties.CRYSTAL_BLOCK).color(color.getMaterialColor())))

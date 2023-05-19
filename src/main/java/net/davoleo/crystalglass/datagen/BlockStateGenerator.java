@@ -34,18 +34,15 @@ public class BlockStateGenerator extends BlockStateProvider {
                 , BlockStateProperties.WATERLOGGED);
 
         //Generate Crystal Blocks blockstates
-        for (CrystalShardBlock.Size size : CrystalShardBlock.Size.values())
-        {
+        for (CrystalShardBlock.Size size : CrystalShardBlock.Size.values()) {
             getVariantBuilder(ModBlocks.CRYSTAL_SHARDS.get(size.ordinal()).get()).forAllStatesExcept(state -> ConfiguredModel.builder()
-                    .modelFile(
-                            models().getExistingFile(
-                                    new ResourceLocation(CrystalGlassMod.MODID, "block/" + size.name().toLowerCase() + "_crystal")
-                            )
-                    )
+                    .modelFile(models().getExistingFile(modLoc("block/" + size.name().toLowerCase() + "_crystal_shard")))
                     .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
                     .rotationX(state.getValue(FaceAttachedHorizontalDirectionalBlock.FACE).ordinal() * 90)
                     .build(), BlockStateProperties.WATERLOGGED);
         }
+
+        simpleBlock(ModBlocks.MOLTEN_CRYSTAL_BLOCK.get(), models().getExistingFile(modLoc("block/molten_crystal")));
 
         //for (DyeColor color : ModBlocks.FULL_CRYSTAL_BLOCKS.keySet())
         //{

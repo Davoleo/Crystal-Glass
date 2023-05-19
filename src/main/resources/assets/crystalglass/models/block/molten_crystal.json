@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "crystalglass:fluid/molten_crystal_still"
+  }
+}

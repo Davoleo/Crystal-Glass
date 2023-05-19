@@ -2,6 +2,7 @@
   "credit": "Made by AlleCraft",
   "parent": "block/block",
   "ambientocclusion": false,
+  "render_type": "translucent",
   "textures": {
     "0": "crystalglass:block/crystal_in",
     "1": "crystalglass:block/crystal_out",
@@ -9,8 +10,16 @@
   },
   "elements": [
     {
-      "from": [7, 0, 7],
-      "to": [9, 8, 9],
+      "from": [
+        7,
+        0,
+        7
+      ],
+      "to": [
+        9,
+        8,
+        9
+      ],
       "faces": {
         "north": {
           "uv": [0, 0, 3, 12],

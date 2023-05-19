@@ -35,6 +35,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -145,7 +146,7 @@ public class CrystalClusterBlock extends CrystalShardBlock {
         }
 
         //Set the age state
-        String itemName = context.getItemInHand().getItem().getDescriptionId();
+        String itemName = ForgeRegistries.ITEMS.getKey(context.getItemInHand().getItem()).getPath();
         char age = itemName.charAt(itemName.length() - 1);
         state = state.setValue(AGE, Character.getNumericValue(age));
 

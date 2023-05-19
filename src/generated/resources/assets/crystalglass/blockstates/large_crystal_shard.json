@@ -1,38 +1,18 @@
 {
   "variants": {
-    "face=floor,facing=north": {
-      "model": "crystalglass:block/large_crystal_shard"
-    },
-    "face=wall,facing=north": {
+    "face=ceiling,facing=east": {
       "model": "crystalglass:block/large_crystal_shard",
-      "x": 90
+      "x": 180,
+      "y": 90
     },
     "face=ceiling,facing=north": {
       "model": "crystalglass:block/large_crystal_shard",
       "x": 180
     },
-    "face=floor,facing=south": {
-      "model": "crystalglass:block/large_crystal_shard",
-      "y": 180
-    },
-    "face=wall,facing=south": {
-      "model": "crystalglass:block/large_crystal_shard",
-      "x": 90,
-      "y": 180
-    },
     "face=ceiling,facing=south": {
       "model": "crystalglass:block/large_crystal_shard",
       "x": 180,
       "y": 180
-    },
-    "face=floor,facing=west": {
-      "model": "crystalglass:block/large_crystal_shard",
-      "y": 270
-    },
-    "face=wall,facing=west": {
-      "model": "crystalglass:block/large_crystal_shard",
-      "x": 90,
-      "y": 270
     },
     "face=ceiling,facing=west": {
       "model": "crystalglass:block/large_crystal_shard",
@@ -43,15 +23,35 @@
       "model": "crystalglass:block/large_crystal_shard",
       "y": 90
     },
+    "face=floor,facing=north": {
+      "model": "crystalglass:block/large_crystal_shard"
+    },
+    "face=floor,facing=south": {
+      "model": "crystalglass:block/large_crystal_shard",
+      "y": 180
+    },
+    "face=floor,facing=west": {
+      "model": "crystalglass:block/large_crystal_shard",
+      "y": 270
+    },
     "face=wall,facing=east": {
       "model": "crystalglass:block/large_crystal_shard",
       "x": 90,
       "y": 90
     },
-    "face=ceiling,facing=east": {
+    "face=wall,facing=north": {
       "model": "crystalglass:block/large_crystal_shard",
-      "x": 180,
-      "y": 90
+      "x": 90
+    },
+    "face=wall,facing=south": {
+      "model": "crystalglass:block/large_crystal_shard",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=west": {
+      "model": "crystalglass:block/large_crystal_shard",
+      "x": 90,
+      "y": 270
     }
   }
 }
