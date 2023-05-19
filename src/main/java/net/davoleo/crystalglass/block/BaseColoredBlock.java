@@ -10,6 +10,4 @@ public class BaseColoredBlock extends Block {
     {
         super(Properties.of(material, color).color(color.getMaterialColor()));
     }
-
-
 }

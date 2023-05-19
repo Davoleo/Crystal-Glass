@@ -27,6 +27,8 @@ public class CommonSetup {
                             ModItems.CRYSTAL_CLUSTERS.forEach(cluster -> output.accept(cluster.get()));
                             output.accept(ModItems.MOLTEN_CRYSTAL_BUCKET.get());
                             ModBlocks.CRYSTAL_SHARDS.forEach(shard -> output.accept(shard.get()));
+                            output.accept(ModBlocks.BASE_CRYSTAL_BLOCK.get());
+                            ModBlocks.COLORED_CRYSTAL_BLOCKS.values().forEach(coloredBlock -> output.accept(coloredBlock.get()));
                         })
         );
     }

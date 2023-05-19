@@ -1,4 +1,4 @@
-package net.davoleo.crystalglass.block;
+package net.davoleo.crystalglass.init;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;

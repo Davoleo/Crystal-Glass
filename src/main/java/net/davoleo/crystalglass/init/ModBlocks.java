@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -58,15 +59,18 @@ public final class ModBlocks extends ModRegistry {
             );
 
     //Decorative FullBlock: Crystal Block
-//    public static final RegistryEntry<Block> BASE_CRYSTAL_BLOCK = CrystalGlassMod.REGISTRATE
-//            .object("crystal_full_block")
-//            .block(properties -> new Block(DefaultProperties.CRYSTAL_BLOCK))
-//            .blockstate((gencontext, registrateProvider) -> registrateProvider.simpleBlock(gencontext.getEntry()))
-//            .simpleItem()
-//            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-//            .register();
+    public static final RegistryEntry<Block> BASE_CRYSTAL_BLOCK = CrystalGlassMod.REGISTRATE
+            .object("crystal_block")
+            .block(properties -> new Block(DefaultProperties.CRYSTAL_BLOCK))
+            .blockstate((gencontext, registrateProvider) -> {
+                ModelFile file = registrateProvider.models().cubeAll(gencontext.getName(), registrateProvider.blockTexture(gencontext.get())).renderType("translucent");
+                registrateProvider.simpleBlock(gencontext.getEntry(), file);
+            })
+            .simpleItem()
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .register();
 
-    //public static final Map<DyeColor, RegistryEntry<Block>> COLORED_CRYSTAL_BLOCKS = registerColoredBlocks("full", properties -> properties);
+    public static final Map<DyeColor, RegistryEntry<Block>> COLORED_CRYSTAL_BLOCKS = registerColoredBlocks("block", properties -> properties);
 
 
     private static Map<DyeColor, RegistryEntry<Block>> registerColoredBlocks(String blockType, UnaryOperator<BlockBehaviour.Properties> transformer) {
@@ -74,9 +78,12 @@ public final class ModBlocks extends ModRegistry {
 
         for (DyeColor color : DyeColor.values()) {
             RegistryEntry<Block> crystalBlock = CrystalGlassMod.REGISTRATE
-                    .object(color.getSerializedName() + "_crystal_" + blockType + "_block")
+                    .object(color.getSerializedName() + "_crystal_" + blockType)
                     .block((properties) -> new Block(transformer.apply(DefaultProperties.CRYSTAL_BLOCK).color(color.getMaterialColor())))
-                    .blockstate((gencontext, registrateProvider) -> registrateProvider.simpleBlock(gencontext.getEntry()))
+                    .blockstate((gencontext, registrateProvider) -> {
+                        ModelFile file = registrateProvider.models().cubeAll(gencontext.getName(), registrateProvider.blockTexture(gencontext.get())).renderType("translucent");
+                        registrateProvider.simpleBlock(gencontext.getEntry(), file);
+                    })
                     .simpleItem()
                     .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                     .register();
