@@ -13,6 +13,9 @@ out
 *.iml
 .idea
 
+# Jar Artifacts
+artifacts
+
 # gradle
 build
 .gradle
