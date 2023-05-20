@@ -3,6 +3,7 @@ package net.davoleo.crystalglass.block;
 import net.davoleo.crystalglass.init.ModBlocks;
 import net.davoleo.crystalglass.util.DefaultProperties;
 import net.davoleo.crystalglass.util.ShapeUtils;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -153,12 +156,17 @@ public class CrystalShardBlock extends FaceAttachedHorizontalDirectionalBlock im
         return state.setValue(WATERLOGGED, fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8);
     }
 
+    @ParametersAreNonnullByDefault
+    @Override
+    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+        return true;
+    }
+
     /**
      * @return the state of the fluid inside of the block if it's waterlogged
      */
     @Nonnull
-    public FluidState getFluidState(BlockState state)
-    {
+    public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
@@ -192,5 +200,10 @@ public class CrystalShardBlock extends FaceAttachedHorizontalDirectionalBlock im
         return super.updateShape(stateIn, facing, facingState, world, currentPos, facingPos);
     }
 
-
+    @ParametersAreNonnullByDefault
+    @MethodsReturnNonnullByDefault
+    @Override
+    public PushReaction getPistonPushReaction(BlockState pState) {
+        return PushReaction.NORMAL;
+    }
 }

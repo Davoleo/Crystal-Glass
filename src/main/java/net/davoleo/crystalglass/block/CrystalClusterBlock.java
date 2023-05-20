@@ -18,6 +18,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -154,13 +156,23 @@ public class CrystalClusterBlock extends CrystalShardBlock {
     }
 
     /**
+     * same as super-super-class version, restores behaviour after being removed in superclass
+     *
+     * @see FaceAttachedHorizontalDirectionalBlock#canSurvive(BlockState, LevelReader, BlockPos)
+     */
+    @ParametersAreNonnullByDefault
+    @Override
+    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+        return canAttach(pLevel, pPos, getConnectedDirection(pState).getOpposite());
+    }
+
+    /**
      * Called when the block is activated through player right click (plays crystal chime sounds)
      */
     @ParametersAreNonnullByDefault
     @Nonnull
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit)
-    {
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         world.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 4F, 1F);
         return InteractionResult.sidedSuccess(world.isClientSide);
     }
@@ -207,8 +219,13 @@ public class CrystalClusterBlock extends CrystalShardBlock {
      * @return if it randomly ticks
      */
     @Override
-    public boolean isRandomlyTicking(BlockState state)
-    {
+    public boolean isRandomlyTicking(BlockState state) {
         return state.getValue(AGE) < 3 || state.getValue(WATERLOGGED);
+    }
+
+    @ParametersAreNonnullByDefault
+    @Override
+    public PushReaction getPistonPushReaction(BlockState pState) {
+        return PushReaction.DESTROY;
     }
 }

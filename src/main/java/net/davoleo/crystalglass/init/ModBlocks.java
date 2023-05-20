@@ -3,6 +3,7 @@ package net.davoleo.crystalglass.init;
 import com.google.common.collect.Lists;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.davoleo.crystalglass.CrystalGlassMod;
+import net.davoleo.crystalglass.block.BaseColoredBlock;
 import net.davoleo.crystalglass.block.CrystalClusterBlock;
 import net.davoleo.crystalglass.block.CrystalShardBlock;
 import net.davoleo.crystalglass.util.DefaultProperties;
@@ -70,16 +71,16 @@ public final class ModBlocks extends ModRegistry {
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .register();
 
-    public static final Map<DyeColor, RegistryEntry<Block>> COLORED_CRYSTAL_BLOCKS = registerColoredBlocks("block", properties -> properties);
+    public static final Map<DyeColor, RegistryEntry<BaseColoredBlock>> COLORED_CRYSTAL_BLOCKS = registerColoredBlocks("block", properties -> properties);
 
 
-    private static Map<DyeColor, RegistryEntry<Block>> registerColoredBlocks(String blockType, UnaryOperator<BlockBehaviour.Properties> transformer) {
-        EnumMap<DyeColor, RegistryEntry<Block>> coloredBlocks = new EnumMap<>(DyeColor.class);
+    private static Map<DyeColor, RegistryEntry<BaseColoredBlock>> registerColoredBlocks(String blockType, UnaryOperator<BlockBehaviour.Properties> transformer) {
+        EnumMap<DyeColor, RegistryEntry<BaseColoredBlock>> coloredBlocks = new EnumMap<>(DyeColor.class);
 
         for (DyeColor color : DyeColor.values()) {
-            RegistryEntry<Block> crystalBlock = CrystalGlassMod.REGISTRATE
+            RegistryEntry<BaseColoredBlock> crystalBlock = CrystalGlassMod.REGISTRATE
                     .object(color.getSerializedName() + "_crystal_" + blockType)
-                    .block((properties) -> new Block(transformer.apply(DefaultProperties.CRYSTAL_BLOCK).color(color.getMaterialColor())))
+                    .block((properties) -> new BaseColoredBlock(transformer.apply(DefaultProperties.CRYSTAL_BLOCK), color))
                     .blockstate((gencontext, registrateProvider) -> {
                         ModelFile file = registrateProvider.models().cubeAll(gencontext.getName(), registrateProvider.blockTexture(gencontext.get())).renderType("translucent");
                         registrateProvider.simpleBlock(gencontext.getEntry(), file);

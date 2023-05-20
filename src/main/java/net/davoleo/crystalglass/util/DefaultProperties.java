@@ -25,8 +25,7 @@ public class DefaultProperties {
                     .isSuffocating((p1, p2, p3) -> false)
                     .isViewBlocking((p1, p2, p3) -> false);
 
-    public static BlockBehaviour.Properties coloredBlockProps(Material material, DyeColor color)
-    {
+    public static BlockBehaviour.Properties createColoredBlockProperties(Material material, DyeColor color) {
         return BlockBehaviour.Properties.of(material, color);
     }
 }
