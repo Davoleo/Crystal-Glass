@@ -25,10 +25,6 @@ buildscript {
     }
 }
 
-plugins {
-    id 'com.github.johnrengelman.shadow' version '6.1.0'
-}
-
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
@@ -43,10 +39,6 @@ group = 'net.davoleo'
 archivesBaseName = 'crystalglass'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-configurations {
-    shade
-}
 
 //./gradlew -PUPDATE_MAPPINGS="new mapping version" -PUPDATE_MAPPINGS_CHANNEL="snapshot" updateMappings
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
@@ -148,9 +140,8 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
 
-    def registrate = "com.tterrag.registrate:Registrate:MC$minecraft_version-$registrate_version"
-    implementation(fg.deobf(registrate))
-    shade(registrate)
+    implementation(fg.deobf("com.tterrag.registrate:Registrate:MC$minecraft_version-$registrate_version"))
+    jarJar(group: 'com.tterrag.registrate', name: 'Registrate', version: "[MC$minecraft_version,MC$next_mc_version)")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
@@ -177,11 +168,6 @@ mixin {
     debug.export = true
 }
 
-shadowJar {
-    configurations = [project.configurations.shade]
-    relocate('com.tterrag.registrate', 'net.davoleo.crystalglass.repack.registrate')
-}
-
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
@@ -198,9 +184,28 @@ jar {
 
     //Set jar output to artifacts directory
     getDestinationDirectory().set(file 'artifacts')
+
+    //to avoid conflicts with jarJar
+    classifier 'slim'
 }
 
-jar.finalizedBy('reobfJar') 
+jar.finalizedBy('reobfJar')
+
+
+jarJar.enable()
+
+reobf {
+    jarJar {}
+}
+
+tasks.jarJar.configure {
+    //removes '-all' from jarJar file
+    classifier ''
+
+    getDestinationDirectory().set(file 'artifacts')
+}
+
+tasks.jarJar.finalizedBy('reobfJarJar')
 
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 //publish.dependsOn('reobfJar')
