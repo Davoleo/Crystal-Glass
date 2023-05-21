@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.PushReaction;
@@ -55,14 +56,17 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
  */
 public class CrystalClusterBlock extends CrystalShardBlock {
 
-    private VoxelShape[][] VOXEL_SHAPES;
+    private static final ResourceLocation automatedDroppingLoot = new ResourceLocation("crystalglass:blocks/waterlogged_crystal_cluster_automated");
 
+    private final VoxelShape[][] voxelShapes;
+
+    //Properties
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    public CrystalClusterBlock()
-    {
+    public CrystalClusterBlock() {
         super(state -> 6 + (3 * state.getValue(AGE)));
-        VOXEL_SHAPES = generateVoxelShapes();
+        voxelShapes = generateVoxelShapes();
     }
 
     /**
@@ -108,11 +112,11 @@ public class CrystalClusterBlock extends CrystalShardBlock {
         Direction horizontalDirection = state.getValue(HORIZONTAL_FACING);
 
         if (face == AttachFace.CEILING)
-            return VOXEL_SHAPES[age][4];
+            return voxelShapes[age][4];
         if (face == AttachFace.FLOOR)
-            return VOXEL_SHAPES[age][5];
+            return voxelShapes[age][5];
 
-        return VOXEL_SHAPES[age][horizontalDirection.get2DDataValue()];
+        return voxelShapes[age][horizontalDirection.get2DDataValue()];
     }
 
     @Override
@@ -129,7 +133,7 @@ public class CrystalClusterBlock extends CrystalShardBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder)
     {
-        stateBuilder.add(HORIZONTAL_FACING, FaceAttachedHorizontalDirectionalBlock.FACE, AGE, WATERLOGGED);
+        stateBuilder.add(HORIZONTAL_FACING, FaceAttachedHorizontalDirectionalBlock.FACE, AGE, WATERLOGGED, POWERED);
     }
 
     @Nullable
@@ -142,10 +146,12 @@ public class CrystalClusterBlock extends CrystalShardBlock {
         if (state == null)
             return null;
 
-        if (fluidstate.is(FluidTags.WATER))
-        {
+        if (fluidstate.is(FluidTags.WATER)) {
             state = state.setValue(WATERLOGGED, true);
         }
+
+        //Set POWERED
+        state = state.setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos()));
 
         //Set the age state
         String itemName = ForgeRegistries.ITEMS.getKey(context.getItemInHand().getItem()).getPath();
@@ -173,7 +179,7 @@ public class CrystalClusterBlock extends CrystalShardBlock {
     @Nonnull
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        world.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 4F, 1F);
+        world.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 8F, 1F);
         return InteractionResult.sidedSuccess(world.isClientSide);
     }
 
@@ -185,31 +191,37 @@ public class CrystalClusterBlock extends CrystalShardBlock {
             //Prev 30 and 15
             if (random.nextInt(waterlogged ? 2 : 4) == 0)
                 world.setBlock(pos, state.setValue(AGE, age + 1), 2);
-        } else {
-            if (waterlogged)
-            {
-                world.setBlock(pos, state.setValue(AGE, age - random.nextInt(3)), 3);
-            }
-            if (!world.isClientSide)
-            {
-                ResourceLocation resourcelocation = new ResourceLocation("crystalglass:blocks/waterlogged_crystal_cluster_automated");
+        } else if (state.getValue(POWERED)) {
 
+            world.setBlock(pos, state.setValue(AGE, age - random.nextInt(3)), 1 | 2);
+
+            if (!world.isClientSide) {
                 LootContext.Builder builder = new LootContext.Builder(world).withRandom(random);
                 LootContext lootContext = builder
                         .withParameter(LootContextParams.BLOCK_STATE, state)
                         .withParameter(LootContextParams.ORIGIN, new Vec3(pos.getX(), pos.getY(), pos.getZ()))
                         .withParameter(LootContextParams.TOOL, new ItemStack(Items.IRON_PICKAXE))
                         .create(LootContextParamSets.BLOCK);
-                LootTable lootTable = world.getServer().getLootTables().get(resourcelocation);
+                LootTable lootTable = world.getServer().getLootTables().get(automatedDroppingLoot);
                 List<ItemStack> lootTableItems = lootTable.getRandomItems(lootContext);
 
-                for (ItemStack stack : lootTableItems)
-                {
-                    //spawnAsEntity(world, pos, stack);
+                for (ItemStack stack : lootTableItems) {
+                    popResource(world, pos, stack);
                 }
             }
 
             world.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 4F, 1.5F + world.random.nextFloat() * 0.4F);
+        }
+    }
+
+    @ParametersAreNonnullByDefault
+    @Override
+    public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
+        if (!pLevel.isClientSide) {
+            boolean powered = pState.getValue(POWERED);
+            if (powered != pLevel.hasNeighborSignal(pPos)) {
+                pLevel.setBlock(pPos, pState.cycle(POWERED), 2);
+            }
         }
     }
 
@@ -220,7 +232,7 @@ public class CrystalClusterBlock extends CrystalShardBlock {
      */
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return state.getValue(AGE) < 3 || state.getValue(WATERLOGGED);
+        return state.getValue(POWERED) || state.getValue(AGE) < 3;
     }
 
     @ParametersAreNonnullByDefault
